@@ -1,0 +1,11 @@
+# ignoruoja node_modules visoje failų sistemoje
+node_modules
+.env
+
+# ignoruoja visus VSCode editoriaus nustatymus visoje failų sistemoje
+.vscode
+
+# ignoruoja obuolinius failus
+.DS_Store
+
+.env
