@@ -12,22 +12,27 @@ import routes from '../../../routing/routes';
 import SignUpTabContainer from './sign-up-tab-container';
 
 const validationSchema = yup.object({
-  name: yup.string()
-    .required('Is required')
-    .min(2, 'At least 2 letters')
-    .max(32, 'Most 32 letters'),
-  employerName: yup.string().when('name', {
-    is: (name) => name && name.length === 0,
+  name: yup.string().when('role', {
+    is: (role) => role === 'CANDIDATE',
     then: yup.string()
       .required('Is required')
       .min(2, 'At least 2 letters')
       .max(32, 'Most 32 letters'),
-    otherwise: yup.string(),
   }),
-  surname: yup.string()
-    .required('Is required')
-    .min(2, 'At least 2 letters')
-    .max(32, 'Most 32 letters'),
+  employerName: yup.string().when('role', {
+    is: (role) => role === 'EMPLOYER',
+    then: yup.string()
+      .required('Is required')
+      .min(2, 'At least 2 letters')
+      .max(32, 'Most 32 letters'),
+  }),
+  surname: yup.string().when('role', {
+    is: (role) => role === 'CANDIDATE',
+    then: yup.string()
+      .required('Is required')
+      .min(2, 'At least 2 letters')
+      .max(32, 'Most 32 letters'),
+  }),
   email: yup.string()
     .required('Is required')
     .email('Is not valid email')
@@ -47,9 +52,10 @@ const validationSchema = yup.object({
     .oneOf([yup.ref('password')], 'Passwords must match'),
   emailChecked: yup.boolean().oneOf([true]),
   emailAvailable: yup.boolean().oneOf([true]),
+  role: yup.string().oneOf(['CANDIDATE', 'EMPLOYER']),
 });
 
-const initialValues = {
+let initialValues = {
   role: 'CANDIDATE',
   name: '',
   employerName: '',
@@ -99,6 +105,7 @@ const SignUpPage = () => {
     initialValues,
     validationSchema,
     onSubmit,
+    enableReinitialize: true, // Lets you change initialValues
   });
 
   const handleEmailChange = (e) => {
@@ -144,12 +151,16 @@ const SignUpPage = () => {
   }
 
   const handleResetForm = (selectedRole) => {
-    resetForm();
-    setValues({
-      ...values,
+    resetForm({
+      values: {
+        ...initialValues,
+        role: selectedRole,
+      },
+    });
+    initialValues = {
+      ...initialValues,
       role: selectedRole,
-    }, true);
-    console.log(values);
+    };
   };
   return (
     <AuthForm
