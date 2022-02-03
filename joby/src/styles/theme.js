@@ -25,6 +25,23 @@ export const defaultTheme = createTheme(theme, {
       height: '60px',
     },
   },
+  overrides: {
+    MUIRichTextEditor: {
+      root: {
+        // backgroundColor: 'white',
+        color: 'white',
+        border: '1px solid #4BD6D0',
+        '& .MuiButtonBase-root': {
+          color: 'white',
+        },
+      },
+      editor: {
+        paddingLeft: '1rem',
+        paddingRight: '1rem',
+        // borderBottom: '1px solid red',
+      },
+    },
+  },
 });
 
 export default defaultTheme;
