@@ -9,7 +9,6 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { styled } from '@mui/material/styles';
-// import MUIEditor, { MUIEditorState } from 'react-mui-draft-wysiwyg';
 import {
   convertFromHTML, ContentState, convertToRaw, convertFromRaw,
 } from 'draft-js';
@@ -54,22 +53,23 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 const CandidateProfilePage = () => {
   const { user } = useSelector(authSelector);
+  // Convert from html to text editor
   const sampleMarkup = '<b>Bold text</b>, <i>Italic text</i><br/ ><br />Other text';
   const contentHTML = convertFromHTML(sampleMarkup);
-  const state = ContentState.createFromBlockArray(contentHTML.contentBlocks, contentHTML.entityMap);
-  // console.log(convertToRaw(state));
+  const state = ContentState
+    .createFromBlockArray(contentHTML.contentBlocks, contentHTML.entityMap);
   const content = JSON.stringify(convertToRaw(state));
+  // Convert from html to text editor
 
   const [test, setTest] = useState(null);
 
   const handleSave = (data) => {
-    // console.log(data);
-    // console.log(convertFromRaw(data));
+    // Convert from text editor to html
     const t = JSON.parse(data);
     const s = convertFromRaw(t);
-    // console.log(s);
-    // console.log(convertToHTML(s));
     setTest(convertToHTML(s));
+    console.log(convertToHTML(s));
+    // Convert from text editor to html
   };
 
   console.log(user);
@@ -133,21 +133,22 @@ const CandidateProfilePage = () => {
             </StyledButton>
           </Grid>
           <Grid item xs={12} md={7}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
+            <Grid container spacing={2} sx={{ mt: { xs: '1rem', md: 0 } }}>
+              <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <FormTextField
                   name="name"
                   label="Name"
                   fullWidth
                   size="medium"
                   value={user.name}
+                  sx={{ maxWidth: '400px' }}
                 />
                 <FormTextField
                   name="surname"
                   label="Surname"
                   fullWidth
                   size="medium"
-                  sx={{ mt: '1rem' }}
+                  sx={{ mt: '1rem', maxWidth: '400px' }}
                   value={user.surname}
                 />
                 <FormTextField
@@ -155,32 +156,46 @@ const CandidateProfilePage = () => {
                   label="Email"
                   fullWidth
                   size="medium"
-                  sx={{ mt: '1rem' }}
+                  sx={{ mt: '1rem', maxWidth: '400px' }}
                   value={user.email}
                   InputProps={{
                     readOnly: true,
                   }}
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <FormTextField
+                  name="oldPassword"
+                  label="Old password"
+                  fullWidth
+                  size="medium"
+                  sx={{ maxWidth: '400px' }}
+                />
                 <FormTextField
                   name="newPassword"
                   label="New password"
                   fullWidth
                   size="medium"
+                  sx={{ mt: '1rem', maxWidth: '400px' }}
                 />
                 <FormTextField
                   name="repeatNewPassword"
                   label="Repeat new password"
                   fullWidth
                   size="medium"
-                  sx={{ mt: '1rem' }}
+                  sx={{ mt: '1rem', maxWidth: '400px' }}
                 />
+                <StyledButton fullWidth>
+                  Update accoount
+                </StyledButton>
               </Grid>
               <Grid item xs={12}>
-                <MUIRichTextEditor label="Start typing..." defaultValue={content} onSave={handleSave} />
+                <MUIRichTextEditor
+                  label="Start typing..."
+                  defaultValue={content}
+                  onSave={handleSave}
+                />
                 <div dangerouslySetInnerHTML={{ __html: test }} />
-                {/* <MUIEditor editorState={editorState} onChange={onChange} /> */}
               </Grid>
             </Grid>
           </Grid>

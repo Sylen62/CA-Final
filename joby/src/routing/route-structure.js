@@ -12,7 +12,7 @@ const routeStructure = [
     childRoutes: [
       { index: true, pageName: 'HomePage' },
       { path: 'jobs', pageName: 'JobPage' },
-      { path: 'jobs/id', pageName: 'JobPageJob' },
+      { path: 'jobs/:id', pageName: 'JobPageJob' },
       { path: 'candidates', pageName: 'CandidatePage' },
       { path: 'candidates/id', pageName: 'CandidatePageCandidate' },
       { path: 'sign-in', pageName: 'SignInPage', auth: PUBLIC_ONLY },
