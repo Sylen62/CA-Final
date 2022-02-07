@@ -32,7 +32,7 @@ const CandidatePage = () => (
         <Grid item key={`${i + 1}`} xs={12} sm={6} md={4} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
           <StyledCard>
             <Link
-              to="/candidates/id"
+              to={`/candidates/${i + 1}`}
               style={{
                 textDecoration: 'none',
                 textTransform: 'none',
