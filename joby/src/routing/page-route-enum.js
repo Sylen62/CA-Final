@@ -14,6 +14,8 @@ import SignUpPage from '../pages/public-only/sign-up-page';
 // candidate
 import CandidateProfilePage from '../pages/auth-only/candidate';
 import EmployerProfilePage from '../pages/auth-only/employer';
+// error
+import ErrorPage from '../pages/error-page';
 
 export default {
   PageLayout,
@@ -26,4 +28,5 @@ export default {
   SignUpPage,
   CandidateProfilePage,
   EmployerProfilePage,
+  ErrorPage,
 };
