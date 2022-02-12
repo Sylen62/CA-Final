@@ -53,6 +53,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 const CandidateProfilePage = () => {
   const { user } = useSelector(authSelector);
+  const textEditorControls = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'undo', 'redo', 'numberList', 'bulletList', 'clear', 'save'];
   // Convert from html to text editor
   const sampleMarkup = '<b>Bold text</b>, <i>Italic text</i><br/ ><br />Other text';
   const contentHTML = convertFromHTML(sampleMarkup);
@@ -194,6 +195,7 @@ const CandidateProfilePage = () => {
                   label="Start typing..."
                   defaultValue={content}
                   onSave={handleSave}
+                  controls={textEditorControls}
                 />
                 <div dangerouslySetInnerHTML={{ __html: test }} />
               </Grid>

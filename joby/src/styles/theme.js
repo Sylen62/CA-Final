@@ -28,7 +28,7 @@ export const defaultTheme = createTheme(theme, {
   overrides: {
     MUIRichTextEditor: {
       root: {
-        // backgroundColor: 'white',
+        backgroundColor: '#121214',
         color: 'white',
         border: '1px solid #4BD6D0',
         '& .MuiButtonBase-root': {
@@ -36,9 +36,14 @@ export const defaultTheme = createTheme(theme, {
         },
       },
       editor: {
-        paddingLeft: '1rem',
-        paddingRight: '1rem',
+        padding: '1rem',
         // borderBottom: '1px solid red',
+      },
+      editorContainer: {
+        baclgroundColor: 'green',
+      },
+      toolbar: {
+        borderBottom: '1px solid #4BD6D0',
       },
     },
   },
