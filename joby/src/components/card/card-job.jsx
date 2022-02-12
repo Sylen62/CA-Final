@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   CardContent, CardHeader, Typography, Box, Card, CardMedia,
 } from '@mui/material';
@@ -24,9 +24,18 @@ const StyledCardMedia = styled(CardMedia)(() => ({
 }));
 
 const CardJob = ({ data }) => {
+  const cardTextRef = useRef(null);
   const {
     id, employerLogo, title, employerDescription, minWage, maxWage, wageType, city, activeFor,
   } = data;
+
+  useEffect(() => {
+    const wordArray = cardTextRef.current.innerHTML.split(' ');
+    while (cardTextRef.current.scrollHeight > cardTextRef.current.offsetHeight) {
+      wordArray.pop();
+      cardTextRef.current.innerHTML = `${wordArray.join(' ')}...`;
+    }
+  }, [cardTextRef]);
   return (
     <StyledCard>
       <Link
@@ -40,9 +49,11 @@ const CardJob = ({ data }) => {
         <StyledCardMedia component="img" src={employerLogo} />
         <CardHeader title={title} sx={{ py: '10px' }} />
         <CardContent sx={{ py: '10px' }}>
-          <Typography variant="body2">
-            {employerDescription}
-          </Typography>
+          <Box ref={cardTextRef} sx={{ maxHeight: '132px' }}>
+            <Typography variant="body2">
+              {employerDescription}
+            </Typography>
+          </Box>
           <Box sx={{ mt: '1rem', display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography variant="body1">
