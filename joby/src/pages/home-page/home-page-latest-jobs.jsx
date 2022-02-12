@@ -1,129 +1,115 @@
 import React from 'react';
-import {
-  Box, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Typography,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
+import { Box, Typography } from '@mui/material';
+import { SwiperSlide } from 'swiper/react';
+import CardJob from '../../components/card/card-job';
+import CardSwiper from '../../components/card-swiper';
+import CardCandidate from '../../components/card/card-candidate';
+import CardSwiperContainer from '../../components/container/card-swiper-container';
 
-const StyledCard = styled(Card)(({ theme }) => ({
-  width: '300px',
-  maxHeight: '500px',
-  backgroundColor: theme.palette.primary.main,
-  border: `1px solid ${theme.palette.secondary.main}`,
-  borderRadius: '10px',
-}));
-
-const StyledCardMedia = styled(CardMedia)(() => ({
-  height: '200px',
-  objectFit: 'cover',
-  objectPosition: 'center',
-  padding: '10px',
-  borderRadius: '20px',
-}));
+const data = [
+  {
+    id: 1,
+    employerLogo: 'https://unsplash.it/200/201',
+    title: 'Job 1',
+    employerDescription: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda modi repellendus exercitationem reiciendis blanditiis, fuga nulla? Harum soluta eaque reprehenderit?',
+    minWage: 1000,
+    maxWage: 2000,
+    wageType: 'Net',
+    city: 'Vilnius',
+    activeFor: 2,
+  },
+  {
+    id: 2,
+    employerLogo: 'https://unsplash.it/200/202',
+    title: 'Job 2',
+    employerDescription: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda modi repellendus exercitationem reiciendis blanditiis, fuga nulla? Harum soluta eaque reprehenderit?',
+    minWage: 800,
+    maxWage: 1800,
+    wageType: 'Net',
+    city: 'Kaunas',
+    activeFor: 21,
+  },
+  {
+    id: 3,
+    employerLogo: 'https://unsplash.it/200/203',
+    title: 'Job 3',
+    employerDescription: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda modi repellendus exercitationem reiciendis blanditiis, fuga nulla? Harum soluta eaque reprehenderit?',
+    minWage: 1200,
+    maxWage: 2400,
+    wageType: 'Gross',
+    city: 'Vilnius',
+    activeFor: 1,
+  },
+  {
+    id: 4,
+    employerLogo: 'https://unsplash.it/200/203',
+    title: 'Job 3',
+    employerDescription: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda modi repellendus exercitationem reiciendis blanditiis, fuga nulla? Harum soluta eaque reprehenderit?',
+    minWage: 1200,
+    maxWage: 2400,
+    wageType: 'Gross',
+    city: 'Vilnius',
+    activeFor: 1,
+  },
+  {
+    id: 5,
+    employerLogo: 'https://unsplash.it/200/203',
+    title: 'Job 3',
+    employerDescription: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda modi repellendus exercitationem reiciendis blanditiis, fuga nulla? Harum soluta eaque reprehenderit?',
+    minWage: 1200,
+    maxWage: 2400,
+    wageType: 'Gross',
+    city: 'Vilnius',
+    activeFor: 1,
+  },
+  {
+    id: 6,
+    employerLogo: 'https://unsplash.it/200/203',
+    title: 'Job 3',
+    employerDescription: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda modi repellendus exercitationem reiciendis blanditiis, fuga nulla? Harum soluta eaque reprehenderit?',
+    minWage: 1200,
+    maxWage: 2400,
+    wageType: 'Gross',
+    city: 'Vilnius',
+    activeFor: 1,
+  },
+];
 
 const HomePageLatestJobs = () => (
-  <Box sx={{ mt: '7vh', mb: '7vh' }}>
+  <Box sx={{ mt: '7vh', mb: '7vh', width: '100%' }}>
     <Typography component="h2" variant="h2" textAlign="center" sx={{ mb: '3rem' }}>Latest job listings</Typography>
-    <Grid container spacing={2} sx={{ display: 'flex', aligntItems: 'center' }}>
-      <Grid item xs={12} sm={6} md={4} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
-        <StyledCard>
-          <StyledCardMedia component="img" src="https://unsplash.it/200/201" />
-          <CardHeader title="Job title" sx={{ py: '10px' }} />
-          <CardContent sx={{ py: '10px' }}>
-            <Typography variant="body2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda modi repellendus exercitationem reiciendis blanditiis,
-              fuga nulla? Harum soluta eaque reprehenderit?
-            </Typography>
-            <Box sx={{ mt: '1rem', display: 'flex', justifyContent: 'space-between' }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="body1">1000 - 2000 €/month.</Typography>
-                <Typography variant="caption">Net</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="body1">Vilnius</Typography>
-                <Typography variant="caption">Left 2d.</Typography>
-              </Box>
-            </Box>
-          </CardContent>
-        </StyledCard>
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
-        <StyledCard>
-          <StyledCardMedia component="img" src="https://unsplash.it/200/201" />
-          <CardHeader title="Job title" sx={{ py: '10px' }} />
-          <CardContent sx={{ py: '10px' }}>
-            <Typography variant="body2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda modi repellendus exercitationem reiciendis blanditiis,
-              fuga nulla? Harum soluta eaque reprehenderit?
-            </Typography>
-            <Box sx={{ mt: '1rem', display: 'flex', justifyContent: 'space-between' }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="body1">1000 - 2000 €/month.</Typography>
-                <Typography variant="caption">Gross</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="body1">Vilnius</Typography>
-                <Typography variant="caption">Left 2d.</Typography>
-              </Box>
-            </Box>
-          </CardContent>
-        </StyledCard>
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
-        <StyledCard>
-          <StyledCardMedia component="img" src="https://unsplash.it/200/201" />
-          <CardHeader title="Job title" sx={{ py: '10px' }} />
-          <CardContent sx={{ py: '10px' }}>
-            <Typography variant="body2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda modi repellendus exercitationem reiciendis blanditiis,
-              fuga nulla? Harum soluta eaque reprehenderit?
-            </Typography>
-            <Box sx={{ mt: '1rem', display: 'flex', justifyContent: 'space-between' }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="body1">1000 - 2000 €/month.</Typography>
-                <Typography variant="caption">Gross</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="body1">Vilnius</Typography>
-                <Typography variant="caption">Left 2d.</Typography>
-              </Box>
-            </Box>
-          </CardContent>
-        </StyledCard>
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
-        <StyledCard>
-          <StyledCardMedia component="img" src="https://unsplash.it/200/201" />
-          <CardHeader title="Job title" sx={{ py: '10px' }} />
-          <CardContent sx={{ py: '10px' }}>
-            <Typography variant="body2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda modi repellendus exercitationem reiciendis blanditiis,
-              fuga nulla? Harum soluta eaque reprehenderit?
-            </Typography>
-            <Box sx={{ mt: '1rem', display: 'flex', justifyContent: 'space-between' }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="body1">1000 - 2000 €/month.</Typography>
-                <Typography variant="caption">Net</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="body1">Vilnius</Typography>
-                <Typography variant="caption">Left 2d.</Typography>
-              </Box>
-            </Box>
-          </CardContent>
-        </StyledCard>
-      </Grid>
-    </Grid>
+    <CardSwiperContainer>
+      <CardSwiper>
+        {data.map((jobData) => (
+          <SwiperSlide key={`${jobData.id + 1}`}>
+            <CardJob data={jobData} />
+          </SwiperSlide>
+        ))}
+      </CardSwiper>
+    </CardSwiperContainer>
     {/* ------------------- */}
     <Typography component="h2" variant="h2" textAlign="center" sx={{ mb: '3rem', mt: '3rem' }}>Latest candidates</Typography>
-    <Grid container spacing={2} sx={{ display: 'flex', aligntItems: 'center' }}>
+    <CardSwiper>
+      <SwiperSlide>
+        <CardCandidate />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardCandidate />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardCandidate />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardCandidate />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardCandidate />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardCandidate />
+      </SwiperSlide>
+    </CardSwiper>
+    {/* <Grid container spacing={2} sx={{ display: 'flex', aligntItems: 'center' }}>
       <Grid item xs={12} sm={6} md={4} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
         <StyledCard>
           <StyledCardMedia component="img" src="https://unsplash.it/200/201" />
@@ -232,7 +218,7 @@ const HomePageLatestJobs = () => (
           </CardContent>
         </StyledCard>
       </Grid>
-    </Grid>
+    </Grid> */}
   </Box>
 );
 

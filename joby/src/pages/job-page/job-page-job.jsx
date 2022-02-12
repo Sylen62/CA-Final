@@ -162,7 +162,7 @@ const JobPageJob = () => {
   // const onDocumentLoadSuccess = ({ nextNumPages }) => {
   //   setNumPages(nextNumPages);
   // };
-  const handleReturn = () => navigate('/jobs');
+  const handleReturn = () => navigate(-1);
   const handleOpenModal = (openModal) => setOpen(openModal);
 
   useEffect(() => {
@@ -242,7 +242,7 @@ const JobPageJob = () => {
           </Grid>
         </Box>
         <Box sx={{ alignSelf: 'start', mt: '2rem' }}>
-          <ButtonOutlined onClick={handleReturn} btnText="Return to jobs" btnReturn sx={{ mr: '1rem' }} />
+          <ButtonOutlined onClick={handleReturn} btnText="Return" btnReturn sx={{ mr: '1rem' }} />
           <ButtonContained onClick={() => handleOpenModal(true)} btnText="Send CV" />
         </Box>
       </Box>
