@@ -1,9 +1,11 @@
 import React from 'react';
-import { Container, Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import CardCandidate from '../../components/card/card-candidate';
+import MainContentContainer from '../../components/container/main-content-container';
 
 const CandidatePage = () => (
-  <Container maxWidth="lg" sx={{ minHeight: 'calc(100vh - 124px)', py: '7vh' }}>
+  <MainContentContainer>
+    <Typography component="h2" variant="h4" textAlign="center" sx={{ mb: '1rem' }}>Candidates</Typography>
     <Grid container spacing={2} sx={{ display: 'flex', aligntItems: 'center' }}>
       { Array.from(new Array(10)).map((_, i) => (
         <Grid item key={`${i + 1}`} xs={12} sm={6} md={4} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -11,7 +13,7 @@ const CandidatePage = () => (
         </Grid>
       ))}
     </Grid>
-  </Container>
+  </MainContentContainer>
 );
 
 export default CandidatePage;

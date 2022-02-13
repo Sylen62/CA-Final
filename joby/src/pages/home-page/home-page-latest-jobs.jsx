@@ -77,7 +77,7 @@ const data = [
 
 const HomePageLatestJobs = () => (
   <Box sx={{ mt: '7vh', mb: '7vh', width: '100%' }}>
-    <Typography component="h2" variant="h2" textAlign="center" sx={{ mb: '3rem' }}>Latest job listings</Typography>
+    <Typography component="h2" variant="h3" textAlign="center" sx={{ mb: '3rem' }}>Latest Job Offers</Typography>
     <CardSwiperContainer>
       <CardSwiper>
         {data.map((jobData) => (
@@ -88,7 +88,7 @@ const HomePageLatestJobs = () => (
       </CardSwiper>
     </CardSwiperContainer>
     {/* ------------------- */}
-    <Typography component="h2" variant="h2" textAlign="center" sx={{ mb: '3rem', mt: '3rem' }}>Latest candidates</Typography>
+    <Typography component="h2" variant="h3" textAlign="center" sx={{ mb: '3rem', mt: '3rem' }}>Latest Candidates</Typography>
     <CardSwiper>
       <SwiperSlide>
         <CardCandidate />

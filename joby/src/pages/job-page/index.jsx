@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-  CardContent, CardHeader, Container, Grid, Typography, Box, Card, CardMedia,
+  CardContent, CardHeader, Grid, Typography, Box, Card, CardMedia,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import MainContentContainer from '../../components/container/main-content-container';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   width: '300px',
@@ -58,7 +59,8 @@ const data = [
 ];
 
 const JobPage = () => (
-  <Container maxWidth="lg" sx={{ minHeight: 'calc(100vh - 124px)', py: '7vh' }}>
+  <MainContentContainer>
+    <Typography component="h2" variant="h4" textAlign="center" sx={{ mb: '1rem' }}>Job Offers</Typography>
     <Grid container spacing={2} sx={{ display: 'flex', aligntItems: 'center' }}>
       { data.map(({
         id, employerLogo, title, employerDescription, minWage, maxWage, wageType, city, activeFor,
@@ -108,7 +110,7 @@ const JobPage = () => (
         </Grid>
       ))}
     </Grid>
-  </Container>
+  </MainContentContainer>
 );
 
 export default JobPage;

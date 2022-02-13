@@ -93,7 +93,7 @@ const EmployerProfilePage = () => {
                   label="New password"
                   fullWidth
                   size="medium"
-                  sx={{ maxWidth: '400px' }}
+                  sx={{ mt: '1rem', maxWidth: '400px' }}
                 />
                 <FormTextField
                   name="repeatNewPassword"
