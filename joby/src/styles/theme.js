@@ -24,6 +24,12 @@ export const defaultTheme = createTheme(theme, {
     toolbar: {
       height: '60px',
     },
+    footer: {
+      height: '60px',
+    },
+    content: {
+      minContentHeight: 'calc(100vh - 124px)',
+    },
   },
   overrides: {
     MUIRichTextEditor: {
