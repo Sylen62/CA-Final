@@ -19,6 +19,7 @@ const routeStructure = [
       { path: 'sign-up', pageName: 'SignUpPage', auth: PUBLIC_ONLY },
       { path: 'candidate/profile', pageName: 'CandidateProfilePage', auth: CANDIDATE },
       { path: 'employer/profile', pageName: 'EmployerProfilePage', auth: EMPLOYER },
+      { path: 'employer/job-offers', pageName: 'EmloyerJobOfferPage', auth: EMPLOYER },
       { path: '*', pageName: 'ErrorPage' },
     ],
   },

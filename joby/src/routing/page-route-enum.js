@@ -13,7 +13,8 @@ import SignUpPage from '../pages/public-only/sign-up-page';
 // employee
 // candidate
 import CandidateProfilePage from '../pages/auth-only/candidate';
-import EmployerProfilePage from '../pages/auth-only/employer';
+import EmployerProfilePage from '../pages/auth-only/employer/employer-profile-page';
+import EmloyerJobOfferPage from '../pages/auth-only/employer/employer-job-offer-page';
 // error
 import ErrorPage from '../pages/error-page';
 
@@ -28,5 +29,6 @@ export default {
   SignUpPage,
   CandidateProfilePage,
   EmployerProfilePage,
+  EmloyerJobOfferPage,
   ErrorPage,
 };

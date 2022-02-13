@@ -7,6 +7,7 @@ import {
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { authSelector } from '../../../store/auth';
 import AuthService from '../../../services/auth-service';
 
@@ -14,7 +15,7 @@ const NavbarUserMenu = () => {
   const anchorRef = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const auth = useSelector(authSelector);
+  const { user } = useSelector(authSelector);
 
   const handleToggleMenu = (open) => setMenuOpen(open);
 
@@ -23,10 +24,19 @@ const NavbarUserMenu = () => {
     AuthService.logout();
   };
 
-  const handleProfileClick = () => {
+  const handleProfileClick = (page) => {
     handleToggleMenu(false);
-    if (auth.user.role === 'CANDIDATE') navigate('candidate/profile');
-    if (auth.user.role === 'EMPLOYER') navigate('employer/profile');
+    switch (page) {
+      case 'profile':
+        if (user.role === 'CANDIDATE') navigate('candidate/profile');
+        if (user.role === 'EMPLOYER') navigate('employer/profile');
+        break;
+      case 'jobOffer':
+        navigate('employer/job-offers');
+        break;
+      default:
+        navigate('');
+    }
   };
 
   return (
@@ -83,12 +93,20 @@ const NavbarUserMenu = () => {
           },
         }}
       >
-        <MenuItem onClick={handleProfileClick}>
+        <MenuItem onClick={() => handleProfileClick('profile')}>
           <ListItemIcon sx={{ color: 'white' }}>
             <PersonIcon fontSize="small" />
           </ListItemIcon>
           Profile
         </MenuItem>
+        {user.role === 'EMPLOYER' ? (
+          <MenuItem onClick={() => handleProfileClick('jobOffer')}>
+            <ListItemIcon sx={{ color: 'white' }}>
+              <FormatListBulletedIcon fontSize="small" />
+            </ListItemIcon>
+            Job Offers
+          </MenuItem>
+        ) : null}
         <Divider sx={{ my: 0.5, backgroundColor: 'secondary.main' }} />
         <MenuItem onClick={handleLogout}>
           <ListItemIcon sx={{ color: 'white' }}>

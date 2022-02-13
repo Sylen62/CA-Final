@@ -37,16 +37,18 @@ export const defaultTheme = createTheme(theme, {
         backgroundColor: '#121214',
         color: 'white',
         border: '1px solid #4BD6D0',
+        borderRadius: '10px',
         '& .MuiButtonBase-root': {
           color: 'white',
         },
       },
       editor: {
         padding: '1rem',
+        minHeight: '300px',
         // borderBottom: '1px solid red',
       },
       editorContainer: {
-        baclgroundColor: 'green',
+        minHeight: '300px',
       },
       toolbar: {
         borderBottom: '1px solid #4BD6D0',
