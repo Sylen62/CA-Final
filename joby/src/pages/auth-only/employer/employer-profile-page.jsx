@@ -59,7 +59,7 @@ const EmployerProfilePage = () => {
           </Grid>
           <Grid item xs={12} md={7}>
             <Grid container spacing={2} sx={{ mt: { xs: '1rem', md: 0 } }}>
-              <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Grid item xs={12} sm={6} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <FormTextField
                   name="employerName"
                   label="Employer name"
@@ -79,21 +79,21 @@ const EmployerProfilePage = () => {
                     readOnly: true,
                   }}
                 />
-              </Grid>
-              <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <FormTextField
                   name="oldPassword"
                   label="Old password"
                   fullWidth
                   size="medium"
-                  sx={{ maxWidth: '400px' }}
+                  sx={{ mt: '1rem', maxWidth: '400px' }}
                 />
+              </Grid>
+              <Grid item xs={12} sm={6} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <FormTextField
                   name="newPassword"
                   label="New password"
                   fullWidth
                   size="medium"
-                  sx={{ mt: '1rem', maxWidth: '400px' }}
+                  sx={{ maxWidth: '400px' }}
                 />
                 <FormTextField
                   name="repeatNewPassword"
@@ -102,7 +102,7 @@ const EmployerProfilePage = () => {
                   size="medium"
                   sx={{ mt: '1rem', maxWidth: '400px' }}
                 />
-                <ButtonUpdate size="large" btnText="Update accoount" fullWidth />
+                <ButtonUpdate size="large" btnText="Update accoount" fullWidth sx={{ mt: '1rem', height: { xs: '42.25px', sm: '56px' } }} />
               </Grid>
             </Grid>
           </Grid>

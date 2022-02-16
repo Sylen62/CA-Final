@@ -46,13 +46,13 @@ const data = [
 ];
 
 const HomePageLatestCandidates = () => (
-  <Box sx={{ mt: '7vh', mb: '7vh', width: '100%' }}>
+  <Box sx={{ mt: '4vh', mb: '4vh', width: '100%' }}>
     <Typography component="h2" variant="h3" textAlign="center" sx={{ mb: '3rem', mt: '3rem' }}>Latest Candidates</Typography>
     <CardSwiperContainer>
       <CardSwiper>
         {data.map((candidate) => (
           <SwiperSlide key={`${candidate.id + 1}`}>
-            <CardCandidate data={candidate} />
+            <CardCandidate data={candidate} height="135px" />
           </SwiperSlide>
         ))}
       </CardSwiper>

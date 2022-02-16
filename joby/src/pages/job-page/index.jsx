@@ -80,7 +80,7 @@ const data = [
 
 const JobPage = () => (
   <MainContentContainer maxWidth="xl">
-    <Typography component="h2" variant="h4" textAlign="center" sx={{ mb: '1rem' }}>Job Offers</Typography>
+    <Typography component="h2" variant="h3" textAlign="center" sx={{ mb: '3rem', mt: '1rem' }}>Job Offers</Typography>
     <Grid container columnSpacing={2} rowSpacing={4}>
       { data.map((jobData) => (
         <Grid item key={jobData.id} xs={12} sm={6} md={4} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>

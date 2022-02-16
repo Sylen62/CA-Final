@@ -81,7 +81,7 @@ const data = [
 ];
 
 const HomePageLatestJobs = () => (
-  <Box sx={{ mt: '7vh', mb: '7vh', width: '100%' }}>
+  <Box sx={{ mt: '4vh', mb: '4vh', width: '100%' }}>
     <Typography component="h2" variant="h3" textAlign="center" sx={{ mb: '3rem' }}>Latest Job Offers</Typography>
     <CardSwiperContainer>
       <CardSwiper>

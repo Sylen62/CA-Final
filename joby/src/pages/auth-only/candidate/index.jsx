@@ -43,40 +43,6 @@ const StyledTextArea = styled(TextareaAutosize)(({ theme }) => ({
 
 const htmlData = '<h2>Lorem</h2><p></p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil nisi sit, maiores commodi explicabo nobis perspiciatis id amet omnis culpa fugit a vitae, unde minima, nemo dolore consequuntur dignissimos? Iste fugit omnis nisi fuga nam asperiores reprehenderit, ratione voluptatum quod natus aut alias dicta ut reiciendis quae fugiat vel dolorum necessitatibus praesentium molestias. Sed quaerat laudantium, ab rerum cumque blanditiis similique voluptatem dicta veritatis esse at omnis nesciunt voluptate possimus, eum eligendi dolorem doloribus impedit sint. </p><p></p><h2>Similique </h2><ul><li>Sed quaerat laudantium.</li><li>Sapiente voluptatem!</li><li>Deserunt natus autem.</li></ul><p></p><p>Sapiente ullam ipsa provident quaerat, illo, alias earum sint cupiditate eius, recusandae commodi facilis odit fugiat qui ipsam nostrum officiis placeat assumenda velit perferendis voluptatem maxime reiciendis dicta nesciunt. Ipsum praesentium, minima ratione alias assumenda ullam eligendi, ea quisquam facere esse iusto debitis omnis autem eius in voluptatibus cumque! Dolor voluptates expedita recusandae ratione, suscipit vel! Sit magni blanditiis, sint ea facilis id beatae veritatis tenetur voluptatibus dolorum cumque autem repellat accusamus dicta, repellendus doloribus amet voluptatem perspiciatis nihil? Nulla, deleniti facere inventore, illum dicta facilis suscipit nostrum architecto enim ut laboriosam nam fugiat eaque consectetur aliquam assumenda cupiditate veniam soluta ab non sapiente voluptatem! Facere labore soluta voluptatum id ratione natus fugiat perspiciatis. Deserunt natus autem velit quae vitae ad corporis animi ut!</p>';
 
-// const StyledImageBox = styled(Box)(({ theme }) => ({
-//   padding: '12px',
-//   maxWidth: '400px',
-//   border: `1px solid ${theme.palette.secondary.main}`,
-//   backgroundColor: theme.palette.primary.main,
-//   borderRadius: '10px',
-// }));
-
-// const StyledButton = styled(Button)(({ theme }) => ({
-//   color: theme.palette.primary.main,
-//   backgroundColor: theme.palette.secondary.main,
-//   // backgroundColor: theme.palette.common.white,
-//   border: 'none',
-//   fontWeight: '600',
-//   marginTop: '10px',
-//   maxWidth: '400px',
-//   '&:hover': {
-//     color: theme.palette.primary.main,
-//     backgroundColor: theme.palette.secondary.main,
-//     // backgroundColor: theme.palette.common.white,
-//     border: 'none',
-//     // '-webkit-text-decoration': 'none',
-//     textDecoration: 'none',
-//   },
-//   '&.Mui-disabled': {
-//     // color: theme.palette.secondary.main,
-//     color: theme.palette.common.white,
-//     backgroundColor: theme.palette.primary.main,
-//     // borderColor: theme.palette.secondary.main,
-//     borderColor: theme.palette.common.white,
-//     borderRadius: '4px',
-//   },
-// }));
-
 const CandidateProfilePage = () => {
   const { user } = useSelector(authSelector);
   const uploadInputRef = useRef(null);
@@ -103,26 +69,6 @@ const CandidateProfilePage = () => {
     setImage(URL.createObjectURL(event.target.files[0]));
     // console.log(event.target.files[0]);
   };
-  // eslint-disable-next-line max-len
-  // const textEditorControls = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'undo', 'redo', 'numberList', 'bulletList', 'clear', 'save'];
-  // // Convert from html to text editor
-  // const sampleMarkup = '<b>Bold text</b>, <i>Italic text</i><br/ ><br />Other text';
-  // const contentHTML = convertFromHTML(sampleMarkup);
-  // const state = ContentState
-  //   .createFromBlockArray(contentHTML.contentBlocks, contentHTML.entityMap);
-  // const content = JSON.stringify(convertToRaw(state));
-  // // Convert from html to text editor
-
-  // const [test, setTest] = useState(null);
-
-  // const handleSave = (data) => {
-  //   // Convert from text editor to html
-  //   const t = JSON.parse(data);
-  //   const s = convertFromRaw(t);
-  //   setTest(convertToHTML(s));
-  //   console.log(convertToHTML(s));
-  //   // Convert from text editor to html
-  // };
 
   console.log(user);
   return (

@@ -25,7 +25,7 @@ const StyledCardMedia = styled(CardMedia)(() => ({
   borderRadius: '20px',
 }));
 
-const CardCandidate = ({ data, maxWidth }) => {
+const CardCandidate = ({ data, maxWidth, height }) => {
   const cardTextRef = useRef(null);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const CardCandidate = ({ data, maxWidth }) => {
               py: '10px',
               display: 'flex',
               alignItems: 'center',
-              height: '135px',
+              height,
             }}
           >
             {/* Max 300 char */}

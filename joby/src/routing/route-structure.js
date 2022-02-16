@@ -20,6 +20,8 @@ const routeStructure = [
       { path: 'candidate/profile', pageName: 'CandidateProfilePage', auth: CANDIDATE },
       { path: 'employer/profile', pageName: 'EmployerProfilePage', auth: EMPLOYER },
       { path: 'employer/job-offers', pageName: 'EmloyerJobOfferPage', auth: EMPLOYER },
+      { path: 'employer/job-offers/:action', pageName: 'EmployerJobOfferAction', auth: EMPLOYER },
+      { path: 'employer/job-offers/:action/:id', pageName: 'EmployerJobOfferAction', auth: EMPLOYER },
       { path: '*', pageName: 'ErrorPage' },
     ],
   },

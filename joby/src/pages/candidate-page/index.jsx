@@ -15,7 +15,7 @@ const data = [
     id: 2,
     candidateLogo: 'https://unsplash.it/200/202',
     candidateName: 'Candidate 2',
-    candidateLookingFor: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda modi repellendus exercitationem reiciendis blanditiis, fuga nulla? Harum soluta eaque reprehenderit? sadasd ads asd asd asddasdasdas asd asd asd ads asd asd asd asd asd asd asd a sda sd asd asd asd asd asd as da sd asd asd asd ads asdasda sda sd, asdasd',
+    candidateLookingFor: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda modi repellendus exercitationem reiciendis blanditiis, fuga nulla? Harum soluta eaque reprehenderit? sadasd ads asd sdfjsdlkf sdjf lksdjf lskdj lsdkfj sldk asd asddasdasdas asd asd asd ads asd asd asd asd asd asd asd a sda sd asd asd asd asd asd as da sd asd asd asd ads asdasda sda sd, asdasd',
   },
   {
     id: 3,
@@ -45,11 +45,11 @@ const data = [
 
 const CandidatePage = () => (
   <MainContentContainer maxWidth="xl">
-    <Typography component="h2" variant="h4" textAlign="center" sx={{ mb: '1rem' }}>Candidates</Typography>
+    <Typography component="h2" variant="h3" textAlign="center" sx={{ mb: '3rem', mt: '1rem' }}>Candidates</Typography>
     <Grid container columnSpacing={2} rowSpacing={4}>
       { data.map((candidateData) => (
         <Grid item key={candidateData.id} xs={12} sm={6} md={4} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
-          <CardCandidate data={candidateData} maxWidth="300px" />
+          <CardCandidate data={candidateData} maxWidth="300px" height="180px" />
         </Grid>
       ))}
     </Grid>
