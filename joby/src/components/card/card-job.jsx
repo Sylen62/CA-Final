@@ -26,7 +26,7 @@ const StyledCardMedia = styled(CardMedia)(() => ({
 const CardJob = ({ data }) => {
   const cardTextRef = useRef(null);
   const {
-    id, employerLogo, title, employerDescription, minWage, maxWage, wageType, city, activeFor,
+    id, employerLogo, title, jobTitle, minWage, maxWage, wageType, city, activeFor,
   } = data;
 
   useEffect(() => {
@@ -47,39 +47,53 @@ const CardJob = ({ data }) => {
         }}
       >
         <StyledCardMedia component="img" src={employerLogo} />
-        <CardHeader title={title} sx={{ py: '10px' }} />
-        <CardContent sx={{ py: '10px' }}>
-          <Box ref={cardTextRef} sx={{ maxHeight: '132px' }}>
-            <Typography variant="body2">
-              {employerDescription}
+        <Box sx={{
+          height: '260px', position: 'relative', display: 'flex', flexDirection: 'column',
+        }}
+        >
+          <CardHeader title={title} sx={{ py: '10px', textAlign: 'center' }} />
+          <CardContent
+            ref={cardTextRef}
+            sx={{
+              py: '10px', display: 'flex', alignItems: 'center', height: '135px',
+            }}
+          >
+            <Typography variant="h6" textAlign="center">
+              {jobTitle}
             </Typography>
-          </Box>
-        </CardContent>
-        <CardActions>
-          <Box sx={{ mt: '1rem', display: 'flex', justifyContent: 'space-between' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <Typography variant="body1">
-                {minWage}
-                {' '}
-                -
-                {' '}
-                {maxWage}
-                {' '}
-                €/month.
-              </Typography>
-              <Typography variant="caption">{wageType}</Typography>
+          </CardContent>
+          <CardActions sx={{
+            position: 'absolute', bottom: 0, left: 10, right: 10,
+          }}
+          >
+            <Box sx={{
+              mt: '1rem', width: '100%', display: 'flex', justifyContent: 'space-between',
+            }}
+            >
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Typography variant="body1">
+                  {minWage}
+                  {' '}
+                  -
+                  {' '}
+                  {maxWage}
+                  {' '}
+                  €/month.
+                </Typography>
+                <Typography variant="caption">{wageType}</Typography>
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Typography variant="body1">{city}</Typography>
+                <Typography variant="caption">
+                  Left
+                  {' '}
+                  {activeFor}
+                  d.
+                </Typography>
+              </Box>
             </Box>
-          </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Typography variant="body1">{city}</Typography>
-            <Typography variant="caption">
-              Left
-              {' '}
-              {activeFor}
-              d.
-            </Typography>
-          </Box>
-        </CardActions>
+          </CardActions>
+        </Box>
       </Link>
     </StyledCard>
   );

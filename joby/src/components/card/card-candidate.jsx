@@ -9,7 +9,7 @@ import SocialLinksContainer from '../containers/social-links-container';
 const StyledCard = styled(Card)(({ theme }) => ({
   margin: 'auto',
   width: '300px',
-  maxHeight: '500px',
+  height: '500px',
   backgroundColor: theme.palette.primary.main,
   border: `1px solid ${theme.palette.secondary.main}`,
   borderRadius: '10px',
@@ -25,7 +25,7 @@ const StyledCardMedia = styled(CardMedia)(() => ({
   borderRadius: '20px',
 }));
 
-const CardCandidate = () => {
+const CardCandidate = ({ data }) => {
   const cardTextRef = useRef(null);
 
   useEffect(() => {
@@ -47,36 +47,30 @@ const CardCandidate = () => {
         }}
       >
         <Box sx={{ position: 'relative', height: '100%' }}>
-          <StyledCardMedia component="img" src="https://unsplash.it/200/201" />
-          <CardHeader title="Candidate name" sx={{ py: '10px', textAlign: 'center' }} />
+          <StyledCardMedia component="img" src={data.candidateLogo} />
+          <CardHeader title={data.candidateName} sx={{ py: '10px', textAlign: 'center' }} />
           <CardContent
             ref={cardTextRef}
             sx={{
               py: '10px',
-              maxHeight: '132px',
-            // overflow: 'hidden',
-            // display: '-webkit-box',
-            // ' -webkit-line-clamp': 7,
-            // '-webkit-box-orient': 'vertical',
+              display: 'flex',
+              alignItems: 'center',
+              height: '135px',
             }}
           >
-            {/* Max 326 char */}
+            {/* Max 300 char */}
             <Typography
               variant="body2"
               textAlign="center"
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda modi repellendus exercitationem reiciendis blanditiis,
-              fuga nulla? Harum soluta eaque reprehenderit? rasdasdad asdasdasd asdasd asdasdasd
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, accusamus!
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, aliquid.
+              {data.candidateLookingFor}
             </Typography>
           </CardContent>
           <CardActions sx={{ position: 'relative', height: '60px' }} />
         </Box>
       </Link>
       <Box sx={{
-        display: 'flex', justifyContent: 'center', position: 'absolute', bottom: 20, height: '40px', width: '100%',
+        display: 'flex', justifyContent: 'center', position: 'absolute', bottom: 25, height: '40px', width: '100%',
       }}
       >
         <SocialLinksContainer
