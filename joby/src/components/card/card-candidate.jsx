@@ -25,7 +25,7 @@ const StyledCardMedia = styled(CardMedia)(() => ({
   borderRadius: '20px',
 }));
 
-const CardCandidate = ({ data }) => {
+const CardCandidate = ({ data, maxWidth }) => {
   const cardTextRef = useRef(null);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const CardCandidate = ({ data }) => {
         }}
       >
         <Box sx={{ position: 'relative', height: '100%' }}>
-          <StyledCardMedia component="img" src={data.candidateLogo} />
+          <StyledCardMedia component="img" src={data.candidateLogo} sx={{ maxWidth }} />
           <CardHeader title={data.candidateName} sx={{ py: '10px', textAlign: 'center' }} />
           <CardContent
             ref={cardTextRef}

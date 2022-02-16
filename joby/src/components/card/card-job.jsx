@@ -23,7 +23,7 @@ const StyledCardMedia = styled(CardMedia)(() => ({
   borderRadius: '20px',
 }));
 
-const CardJob = ({ data }) => {
+const CardJob = ({ data, maxWidth }) => {
   const cardTextRef = useRef(null);
   const {
     id, employerLogo, title, jobTitle, minWage, maxWage, wageType, city, activeFor,
@@ -46,7 +46,7 @@ const CardJob = ({ data }) => {
           color: 'white',
         }}
       >
-        <StyledCardMedia component="img" src={employerLogo} />
+        <StyledCardMedia component="img" src={employerLogo} sx={{ maxWidth }} />
         <Box sx={{
           height: '260px', position: 'relative', display: 'flex', flexDirection: 'column',
         }}
