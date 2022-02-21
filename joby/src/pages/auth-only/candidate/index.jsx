@@ -76,61 +76,76 @@ const CandidateProfilePage = () => {
       <Typography component="h2" variant="h4" textAlign="center">Profile</Typography>
       <SecondaryContentContainer>
         <Grid container spacing={1}>
-          <Grid item xs={12} md={4.7} sx={{ display: { xs: 'flex', md: 'block', lg: 'block' }, alignItems: 'center', flexDirection: 'column' }}>
-            <ImageContainer>
-              <Image src={image || 'https://unsplash.it/500/400'} />
-            </ImageContainer>
-            <ButtonUpdate onClick={() => uploadInputRef.current.click()} size="large" btnText="Change image" fullWidth />
-            <input ref={uploadInputRef} onChange={handleImageUpload} type="file" accept="image/*" hidden />
-            <FormTextField
-              name="linkedIn"
-              label="LinkedIn"
-              fullWidth
-              size="small"
-              placeholder="Your link"
-              sx={{ mt: '1rem', maxWidth: '400px' }}
-              InputProps={{
-                startAdornment: <LinkedInIcon position="start" sx={{ mr: '5px' }} />,
-              }}
-            />
-            <FormTextField
-              name="facebook"
-              label="Facebook"
-              fullWidth
-              size="small"
-              placeholder="Your link"
-              sx={{ mt: '1rem', maxWidth: '400px' }}
-              InputProps={{
-                startAdornment: <FacebookIcon position="start" sx={{ mr: '5px' }} />,
-              }}
-            />
-            <FormTextField
-              name="twitter"
-              label="Twitter"
-              fullWidth
-              size="small"
-              placeholder="Your link"
-              sx={{ mt: '1rem', maxWidth: '400px' }}
-              InputProps={{
-                startAdornment: <TwitterIcon position="start" sx={{ mr: '5px' }} />,
-              }}
-            />
-            <FormTextField
-              name="instagram"
-              label="Instagram"
-              fullWidth
-              size="small"
-              placeholder="Your link"
-              sx={{ mt: '1rem', maxWidth: '400px' }}
-              InputProps={{
-                startAdornment: <InstagramIcon position="start" sx={{ mr: '5px' }} />,
-              }}
-            />
-            <ButtonUpdate btnText="Update Socials" fullWidth />
+          <Grid
+            item
+            spacing={2}
+            xs={12}
+            sm={12}
+            md={4.7}
+            sx={{
+              display: { xs: 'flex', md: 'block', lg: 'block' }, alignItems: 'center', flexDirection: 'column', margin: 'auto',
+            }}
+          >
+            <Grid container>
+              <Grid item xs={12} sm={6} md={12} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <ImageContainer>
+                  <Image src={image || 'https://unsplash.it/500/400'} />
+                </ImageContainer>
+                <ButtonUpdate onClick={() => uploadInputRef.current.click()} size="large" btnText="Change image" fullWidth />
+                <input ref={uploadInputRef} onChange={handleImageUpload} type="file" accept="image/*" hidden />
+              </Grid>
+              <Grid item xs={12} sm={6} md={12} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <FormTextField
+                  name="linkedIn"
+                  label="LinkedIn"
+                  fullWidth
+                  size="small"
+                  placeholder="Your link"
+                  sx={{ mt: '1rem', maxWidth: '400px' }}
+                  InputProps={{
+                    startAdornment: <LinkedInIcon position="start" sx={{ mr: '5px' }} />,
+                  }}
+                />
+                <FormTextField
+                  name="facebook"
+                  label="Facebook"
+                  fullWidth
+                  size="small"
+                  placeholder="Your link"
+                  sx={{ mt: '1rem', maxWidth: '400px' }}
+                  InputProps={{
+                    startAdornment: <FacebookIcon position="start" sx={{ mr: '5px' }} />,
+                  }}
+                />
+                <FormTextField
+                  name="twitter"
+                  label="Twitter"
+                  fullWidth
+                  size="small"
+                  placeholder="Your link"
+                  sx={{ mt: '1rem', maxWidth: '400px' }}
+                  InputProps={{
+                    startAdornment: <TwitterIcon position="start" sx={{ mr: '5px' }} />,
+                  }}
+                />
+                <FormTextField
+                  name="instagram"
+                  label="Instagram"
+                  fullWidth
+                  size="small"
+                  placeholder="Your link"
+                  sx={{ mt: '1rem', maxWidth: '400px' }}
+                  InputProps={{
+                    startAdornment: <InstagramIcon position="start" sx={{ mr: '5px' }} />,
+                  }}
+                />
+                <ButtonUpdate btnText="Update Socials" fullWidth />
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={7}>
+          <Grid item xs={12} md={7} sx={{ margin: 'auto' }}>
             <Grid container spacing={2} sx={{ mt: { xs: '1rem', md: 0 } }}>
-              <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Grid item xs={12} sm={6} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <FormTextField
                   name="employerName"
                   label="Employer name"
@@ -158,7 +173,7 @@ const CandidateProfilePage = () => {
                   sx={{ mt: '1rem', maxWidth: '400px' }}
                 />
               </Grid>
-              <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Grid item xs={12} sm={6} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <FormTextField
                   name="newPassword"
                   label="New password"
@@ -173,7 +188,7 @@ const CandidateProfilePage = () => {
                   size="medium"
                   sx={{ mt: '1rem', maxWidth: '400px' }}
                 />
-                <ButtonUpdate size="large" btnText="Update accoount" fullWidth sx={{ mt: '1rem', height: { xs: '42.25px', md: '56px' } }} />
+                <ButtonUpdate size="large" btnText="Update accoount" fullWidth sx={{ mt: '1rem', height: { xs: '42.25px', sm: '56px' } }} />
               </Grid>
               <Grid item xs={12} sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography component="h3" variant="h5" textAlign="center">What kind of job are you looking for?</Typography>
@@ -182,6 +197,7 @@ const CandidateProfilePage = () => {
                   placeholder="Junior developer looking for..."
                   fullWidth
                   maxlength="300"
+                  style={{ width: '100%' }}
                 />
                 <ButtonUpdate size="medium" btnText="Save" sx={{ mt: '1rem', alignSelf: 'flex-end' }} />
               </Grid>

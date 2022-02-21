@@ -1,9 +1,10 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { SwiperSlide } from 'swiper/react';
 import CardJob from '../../components/card/card-job';
 import CardSwiper from '../../components/card-swiper';
 import CardSwiperContainer from '../../components/container/card-swiper-container';
+import LatestListingsContainer from '../../components/container/latest-listings-container';
 
 const data = [
   {
@@ -81,7 +82,7 @@ const data = [
 ];
 
 const HomePageLatestJobs = () => (
-  <Box sx={{ mt: '4vh', mb: '4vh', width: '100%' }}>
+  <LatestListingsContainer>
     <Typography component="h2" variant="h3" textAlign="center" sx={{ mb: '3rem' }}>Latest Job Offers</Typography>
     <CardSwiperContainer>
       <CardSwiper>
@@ -92,7 +93,7 @@ const HomePageLatestJobs = () => (
         ))}
       </CardSwiper>
     </CardSwiperContainer>
-  </Box>
+  </LatestListingsContainer>
 );
 
 export default HomePageLatestJobs;

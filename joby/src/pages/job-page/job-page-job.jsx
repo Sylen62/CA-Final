@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-// import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import {
   Container, Box, Grid, Typography,
@@ -11,65 +10,12 @@ import ButtonContained from '../../components/button/button-contained';
 import ButtonOutlined from '../../components/button/button-outlined';
 import SendCvModal from '../../components/modal/send-cv-modal';
 
-// import PDF from './Pro.pdf';
-
-// pdfjs.GlobalWorkerOptions.workerSrc = `
-// unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
-
-// // Nezinau ar reikia
-// const options = {
-//   cMapUrl: `//unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps`,
-//   cMapPacked: true,
-// };
-
-// const StyledCard = styled(Card)(({ theme }) => ({
-//   display: 'flex',
-//   backgroundColor: theme.palette.primary.main,
-//   border: `1px solid ${theme.palette.secondary.main}`,
-//   borderRadius: '10px',
-//   padding: '12px',
-//   [theme.breakpoints.up('xs')]: {
-//     width: '600px',
-//     alignItems: 'center',
-//   },
-//   [theme.breakpoints.up('md')]: {
-//     width: '900px',
-//     height: '250px',
-//     // alignItems: 'center',
-//   },
-//   [theme.breakpoints.up('lg')]: {
-//     width: '1200px',
-//     height: '250px',
-//     // alignItems: 'center',
-//   },
-// }));
-
-// const StyledCardMedia = styled(CardMedia)(({ theme }) => ({
-//   objectFit: 'cover',
-//   objectPosition: 'center',
-//   borderRadius: '20px',
-//   [theme.breakpoints.up('xs')]: {
-//     width: '100%',
-//     height: '50%',
-//   },
-// }));
-
 const CompanyInfoContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   border: `1px solid ${theme.palette.secondary.main}`,
   borderRadius: '10px',
   padding: '10px',
   width: '100%',
-  // maxHeight: '255px',
-  // [theme.breakpoints.up('sm')]: {
-  //   height: '525px',
-  // },
-  // [theme.breakpoints.up('md')]: {
-  //   height: '250px',
-  // },
-  // [theme.breakpoints.up('lg')]: {
-  //   height: '255px',
-  // },
 }));
 
 const StyledImageBox = styled(Box)(({ theme }) => ({
@@ -147,22 +93,9 @@ const JobPageJob = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const jobOfferRef = useRef(null);
-  // const [file, setFile] = useState(''); // ./pedeef.pdf
-  // const [numPages, setNumPages] = useState(null);
 
-  // useEffect(() => {
-  //   setFile(PDF);
-  // }, []);
-
-  // const onFileChange = (event) => {
-  //   setFile(event.target.files[0]);
-  //   console.log(event.target.files[0]);
-  // };
-
-  // const onDocumentLoadSuccess = ({ nextNumPages }) => {
-  //   setNumPages(nextNumPages);
-  // };
   const handleReturn = () => navigate(-1);
+
   const handleOpenModal = (openModal) => setOpen(openModal);
 
   useEffect(() => {
@@ -202,7 +135,6 @@ const JobPageJob = () => {
         <Typography component="h4" variant="h4" textAlign="center" sx={{ mt: '1rem' }}>Job Offer</Typography>
         <JobInfoContainer sx={{ mt: '1rem' }}>
           <Typography component="h4" variant="h4">{data.jobOffer.title}</Typography>
-          {/* <div ref={div} dangerouslySetInnerHTML={{ __html: test }} /> */}
           <Box ref={jobOfferRef} />
         </JobInfoContainer>
         <Typography component="h4" variant="h4" textAlign="center" sx={{ my: '1rem' }}>Additional Information</Typography>
