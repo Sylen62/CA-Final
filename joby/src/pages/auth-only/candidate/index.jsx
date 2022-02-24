@@ -26,6 +26,7 @@ import Image from '../../../components/image';
 import ButtonUpdate from '../../../components/button/button-update';
 import ButtonOutlined from '../../../components/button/button-outlined';
 import ButtonContained from '../../../components/button/button-contained';
+import ProfileService from '../../../services/profile-service';
 
 const StyledTextArea = styled(TextareaAutosize)(({ theme }) => ({
   marginTop: '1rem',
@@ -46,7 +47,7 @@ const htmlData = '<h2>Lorem</h2><p></p><p>Lorem ipsum dolor sit amet consectetur
 const CandidateProfilePage = () => {
   const { user } = useSelector(authSelector);
   const uploadInputRef = useRef(null);
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(user.image);
   const [editorContent, setEditorContent] = useState();
   const [initEditorContent, setInitEditorContent] = useState();
   const textEditorControls = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'undo', 'redo', 'numberList', 'bulletList', 'clear'];
@@ -65,8 +66,9 @@ const CandidateProfilePage = () => {
     console.log(editorContent);
   };
 
-  const handleImageUpload = (event) => {
+  const handleImageUpload = async (event) => {
     setImage(URL.createObjectURL(event.target.files[0]));
+    await ProfileService.updateImage(event.target.files);
     // console.log(event.target.files[0]);
   };
 

@@ -6,6 +6,8 @@ import {
 } from 'draft-js';
 import { convertToHTML } from 'draft-convert';
 import MUIRichTextEditor from 'mui-rte';
+import * as yup from 'yup';
+import { useFormik } from 'formik';
 import { authSelector } from '../../../store/auth';
 import MainContentContainer from '../../../components/container/main-content-container';
 import SecondaryContentContainer from '../../../components/container/secondary-content-container';
@@ -15,35 +17,100 @@ import ButtonUpdate from '../../../components/button/button-update';
 import FormTextField from '../../../components/text-field/form-text-field';
 import ButtonOutlined from '../../../components/button/button-outlined';
 import ButtonContained from '../../../components/button/button-contained';
+import ProfileService from '../../../services/profile-service';
+import UserProfileForm from '../../../components/form/user-profile-form';
 
-const htmlData = '<h2>Lorem</h2><p></p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil nisi sit, maiores commodi explicabo nobis perspiciatis id amet omnis culpa fugit a vitae, unde minima, nemo dolore consequuntur dignissimos? Iste fugit omnis nisi fuga nam asperiores reprehenderit, ratione voluptatum quod natus aut alias dicta ut reiciendis quae fugiat vel dolorum necessitatibus praesentium molestias. Sed quaerat laudantium, ab rerum cumque blanditiis similique voluptatem dicta veritatis esse at omnis nesciunt voluptate possimus, eum eligendi dolorem doloribus impedit sint. </p><p></p><h2>Similique </h2><ul><li>Sed quaerat laudantium.</li><li>Sapiente voluptatem!</li><li>Deserunt natus autem.</li></ul><p></p><p>Sapiente ullam ipsa provident quaerat, illo, alias earum sint cupiditate eius, recusandae commodi facilis odit fugiat qui ipsam nostrum officiis placeat assumenda velit perferendis voluptatem maxime reiciendis dicta nesciunt. Ipsum praesentium, minima ratione alias assumenda ullam eligendi, ea quisquam facere esse iusto debitis omnis autem eius in voluptatibus cumque! Dolor voluptates expedita recusandae ratione, suscipit vel! Sit magni blanditiis, sint ea facilis id beatae veritatis tenetur voluptatibus dolorum cumque autem repellat accusamus dicta, repellendus doloribus amet voluptatem perspiciatis nihil? Nulla, deleniti facere inventore, illum dicta facilis suscipit nostrum architecto enim ut laboriosam nam fugiat eaque consectetur aliquam assumenda cupiditate veniam soluta ab non sapiente voluptatem! Facere labore soluta voluptatum id ratione natus fugiat perspiciatis. Deserunt natus autem velit quae vitae ad corporis animi ut!</p>';
+// eslint-disable-next-line max-len
+// const htmlData = '<h2>Lorem</h2><p></p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil nisi sit, maiores commodi explicabo nobis perspiciatis id amet omnis culpa fugit a vitae, unde minima, nemo dolore consequuntur dignissimos? Iste fugit omnis nisi fuga nam asperiores reprehenderit, ratione voluptatum quod natus aut alias dicta ut reiciendis quae fugiat vel dolorum necessitatibus praesentium molestias. Sed quaerat laudantium, ab rerum cumque blanditiis similique voluptatem dicta veritatis esse at omnis nesciunt voluptate possimus, eum eligendi dolorem doloribus impedit sint. </p><p></p><h2>Similique </h2><ul><li>Sed quaerat laudantium.</li><li>Sapiente voluptatem!</li><li>Deserunt natus autem.</li></ul><p></p><p>Sapiente ullam ipsa provident quaerat, illo, alias earum sint cupiditate eius, recusandae commodi facilis odit fugiat qui ipsam nostrum officiis placeat assumenda velit perferendis voluptatem maxime reiciendis dicta nesciunt. Ipsum praesentium, minima ratione alias assumenda ullam eligendi, ea quisquam facere esse iusto debitis omnis autem eius in voluptatibus cumque! Dolor voluptates expedita recusandae ratione, suscipit vel! Sit magni blanditiis, sint ea facilis id beatae veritatis tenetur voluptatibus dolorum cumque autem repellat accusamus dicta, repellendus doloribus amet voluptatem perspiciatis nihil? Nulla, deleniti facere inventore, illum dicta facilis suscipit nostrum architecto enim ut laboriosam nam fugiat eaque consectetur aliquam assumenda cupiditate veniam soluta ab non sapiente voluptatem! Facere labore soluta voluptatum id ratione natus fugiat perspiciatis. Deserunt natus autem velit quae vitae ad corporis animi ut!</p>';
 
 const EmployerProfilePage = () => {
   const { user } = useSelector(authSelector);
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(user.image);
   const [editorContent, setEditorContent] = useState();
   const [initEditorContent, setInitEditorContent] = useState();
   const uploadInputRef = useRef(null);
   const textEditorControls = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'undo', 'redo', 'numberList', 'bulletList', 'clear'];
 
+  const validationSchema = yup.object({
+    employerName: yup.string()
+      .required('Is required')
+      .min(2, 'At least 2 letters')
+      .max(32, 'Most 32 letters'),
+    newPassword: yup.string()
+      // .required('Is required')
+      .min(8, 'At least 8 symbols')
+      .max(32, 'Most 32 symbols')
+      .matches(/^.*[A-ZĄČĘĖĮŠŲŪŽ]+.*$/, 'Atleast one capital letter')
+      .matches(/^.*\d+.*$/, 'Atleast one number'),
+    repeatNewPassword: yup.string().when('newPassword', {
+      is: (pass) => Boolean(pass),
+      then: yup.string()
+        .required('Is required')
+        .oneOf([yup.ref('newPassword')], 'Passwords must match'),
+    }),
+  });
+
+  const initialValues = {
+    employerName: user.employerName,
+    email: user.email,
+    newPassword: '',
+    repeatNewPassword: '',
+  };
+
+  const onSubmit = async (data) => {
+    await ProfileService.updateUserData(data);
+  };
+
+  const {
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    errors,
+    touched,
+    values,
+    resetForm,
+    // isSubmitting,
+    // isValid,
+    // dirty,
+    // setFieldValue,
+    // setValues,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit,
+  });
+
   useEffect(() => {
-    const data = convertFromHTML(htmlData);
+    console.log('a');
+    resetForm({
+      values: {
+        ...initialValues,
+      },
+    });
+    if (!user.employerDescription) return;
+    const data = convertFromHTML(JSON.parse(user.employerDescription));
     const state = ContentState.createFromBlockArray(data.contentBlocks, data.entityMap);
     setInitEditorContent(JSON.stringify(convertToRaw(state)));
   }, []);
 
-  const handleChange = (data) => {
+  const handleDescriptionChange = (data) => {
     setEditorContent(convertToHTML(data.getCurrentContent()));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     console.log(editorContent);
+    await ProfileService.updateEmployerDescription({ t: JSON.stringify(editorContent) });
   };
 
-  const handleImageUpload = (event) => {
+  const handleImageUpload = async (event) => {
     setImage(URL.createObjectURL(event.target.files[0]));
-    // console.log(event.target.files[0]);
+    await ProfileService.updateImage(event.target.files);
   };
+
+  // const handleUserDetailsUpdate = (event) => {
+  //   event.preventDefault();
+  //   console.log(event.target.value);
+  // };
 
   return (
     <MainContentContainer>
@@ -58,53 +125,67 @@ const EmployerProfilePage = () => {
             <input ref={uploadInputRef} onChange={handleImageUpload} type="file" accept="image/*" hidden />
           </Grid>
           <Grid item xs={12} md={7}>
-            <Grid container spacing={2} sx={{ mt: { xs: '1rem', md: 0 } }}>
-              <Grid item xs={12} sm={6} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <FormTextField
-                  name="employerName"
-                  label="Employer name"
-                  fullWidth
-                  size="medium"
-                  value={user.employerName}
-                  sx={{ maxWidth: '400px' }}
-                />
-                <FormTextField
-                  name="email"
-                  label="Email"
-                  fullWidth
-                  size="medium"
-                  sx={{ mt: '1rem', maxWidth: '400px' }}
-                  value={user.email}
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                />
-                <FormTextField
-                  name="oldPassword"
-                  label="Old password"
-                  fullWidth
-                  size="medium"
-                  sx={{ mt: '1rem', maxWidth: '400px' }}
-                />
+            <UserProfileForm onSubmit={handleSubmit}>
+              <Grid container spacing={2} sx={{ mt: { xs: '1rem', md: 0 } }}>
+                <Grid item xs={12} sm={6} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <FormTextField
+                    name="employerName"
+                    label="Employer name"
+                    fullWidth
+                    size="medium"
+                    sx={{ maxWidth: '400px' }}
+                    // formik
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.employerName}
+                    error={touched.employerName && Boolean(errors.employerName)}
+                    helperText={touched.employerName && errors.employerName}
+                  />
+                  <FormTextField
+                    name="email"
+                    label="Email"
+                    fullWidth
+                    size="medium"
+                    sx={{ mt: '1rem', maxWidth: '400px' }}
+                    value={values.email}
+                    InputProps={{
+                      readOnly: true,
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <FormTextField
+                    name="newPassword"
+                    label="New password"
+                    type="password"
+                    fullWidth
+                    size="medium"
+                    sx={{ maxWidth: '400px' }}
+                    // formik
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.newPassword}
+                    error={touched.newPassword && Boolean(errors.newPassword)}
+                    helperText={touched.newPassword && errors.newPassword}
+                  />
+                  <FormTextField
+                    name="repeatNewPassword"
+                    label="Repeat new password"
+                    type="password"
+                    fullWidth
+                    size="medium"
+                    sx={{ mt: '1rem', maxWidth: '400px' }}
+                    // formik
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.repeatNewPassword}
+                    error={touched.repeatNewPassword && Boolean(errors.repeatNewPassword)}
+                    helperText={touched.repeatNewPassword && errors.repeatNewPassword}
+                  />
+                  <ButtonUpdate type="submit" size="large" btnText="Update accoount" fullWidth sx={{ mt: '1rem' }} />
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <FormTextField
-                  name="newPassword"
-                  label="New password"
-                  fullWidth
-                  size="medium"
-                  sx={{ maxWidth: '400px' }}
-                />
-                <FormTextField
-                  name="repeatNewPassword"
-                  label="Repeat new password"
-                  fullWidth
-                  size="medium"
-                  sx={{ mt: '1rem', maxWidth: '400px' }}
-                />
-                <ButtonUpdate size="large" btnText="Update accoount" fullWidth sx={{ mt: '1rem', height: { xs: '42.25px', sm: '56px' } }} />
-              </Grid>
-            </Grid>
+            </UserProfileForm>
           </Grid>
         </Grid>
       </SecondaryContentContainer>
@@ -114,7 +195,7 @@ const EmployerProfilePage = () => {
           label="Start typing..."
           value={initEditorContent}
           controls={textEditorControls}
-          onChange={(data) => handleChange(data)}
+          onChange={(data) => handleDescriptionChange(data)}
         />
         <Box sx={{ alignSelf: 'end', mt: '2rem' }}>
           <ButtonOutlined btnText="Delete" sx={{ mr: '1rem' }} onClick={() => setInitEditorContent('')} />

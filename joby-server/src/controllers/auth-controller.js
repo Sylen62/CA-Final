@@ -21,7 +21,7 @@ const register = async (req, res) => {
     const user = new UserViewModel(userDoc);
     res.status(201).json({
       user,
-      token: generateToken({ email, role: userDoc.role })
+      token: generateToken({ email, role: userDoc.role }),
     });
 
     const hashedPassword = await hashPasswordAsync(password);
@@ -30,7 +30,7 @@ const register = async (req, res) => {
     });
   } catch (error) {
     res.status(400).json({
-      message: error.message
+      message: error.message,
     });
   }
 };
@@ -47,11 +47,9 @@ const login = async (req, res) => {
         user,
         token: generateToken({ email, role: userDoc.role }),
       });
-    }
-    else {
+    } else {
       res.status(401).json({ message: 'Incorrect password' });
     }
-
   } catch (error) {
     res.status(404).json({ message: 'Email is not found' });
   }
@@ -67,7 +65,7 @@ const auth = async (req, res) => {
   } catch (error) {
     res.status(403).json({ message: 'Token not valid' });
   }
-}
+};
 
 const checkEmail = async (req, res) => {
   const { email } = req.query;
@@ -79,7 +77,7 @@ const checkEmail = async (req, res) => {
   }
   const userDoc = await UserModel.findOne({ email });
   res.status(200).json({ available: !userDoc });
-}
+};
 
 module.exports = {
   register,
