@@ -25,8 +25,10 @@ const StyledCardMedia = styled(CardMedia)(() => ({
 
 const CardJob = ({ data, maxWidth }) => {
   const cardTextRef = useRef(null);
+  console.log(data);
   const {
-    id, employerLogo, title, jobTitle, minWage, maxWage, wageType, city, activeFor,
+    id, user: { image, employerName }, offerName, salaryFrom, salaryTo, salaryType, city,
+    activeUntill,
   } = data;
 
   useEffect(() => {
@@ -46,12 +48,12 @@ const CardJob = ({ data, maxWidth }) => {
           color: 'white',
         }}
       >
-        <StyledCardMedia component="img" src={employerLogo} sx={{ maxWidth }} />
+        <StyledCardMedia component="img" src={image} sx={{ maxWidth }} />
         <Box sx={{
           height: '260px', position: 'relative', display: 'flex', flexDirection: 'column',
         }}
         >
-          <CardHeader title={title} sx={{ py: '10px', textAlign: 'center' }} />
+          <CardHeader title={employerName} sx={{ py: '10px', textAlign: 'center' }} />
           <CardContent
             ref={cardTextRef}
             sx={{
@@ -59,7 +61,7 @@ const CardJob = ({ data, maxWidth }) => {
             }}
           >
             <Typography variant="h6" textAlign="center">
-              {jobTitle}
+              {offerName}
             </Typography>
           </CardContent>
           <CardActions sx={{
@@ -72,22 +74,22 @@ const CardJob = ({ data, maxWidth }) => {
             >
               <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Typography variant="body1">
-                  {minWage}
+                  {salaryFrom}
                   {' '}
                   -
                   {' '}
-                  {maxWage}
+                  {salaryTo}
                   {' '}
                   €/month.
                 </Typography>
-                <Typography variant="caption">{wageType}</Typography>
+                <Typography variant="caption">{salaryType}</Typography>
               </Box>
               <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Typography variant="body1">{city}</Typography>
                 <Typography variant="caption">
                   Left
                   {' '}
-                  {activeFor}
+                  {activeUntill}
                   d.
                 </Typography>
               </Box>

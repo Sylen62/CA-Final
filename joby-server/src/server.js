@@ -5,6 +5,7 @@ require('dotenv').config();
 const cors = require('cors');
 const authRouter = require('./routes/auth-router');
 const userRouter = require('./routes/user-router');
+const jobOfferRouter = require('./routes/job-offer-router');
 
 const server = express();
 const { SERVER_PORT, DB_CONNECTION, SERVER_DOMAIN, PUBLIC_PATH } = process.env;
@@ -23,6 +24,7 @@ server.use(express.static(PUBLIC_PATH));
 // Response handlers
 server.use('/api/auth', authRouter);
 server.use('/api/users', userRouter);
+server.use('/api/employer/job-offers', jobOfferRouter);
 
 server.listen(SERVER_PORT, () => {
   console.log(`puslapis veikia ant ${SERVER_DOMAIN}:${SERVER_PORT}/`);

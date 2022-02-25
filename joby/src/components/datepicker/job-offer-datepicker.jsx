@@ -20,7 +20,7 @@ const JobOfferDatepicker = ({ name, label }) => {
         onChange={(newValue) => {
           setValue(newValue);
         }}
-        renderInput={(params) => <FormTextField sx={{ mt: '1rem' }} fullWidth {...params} />}
+        renderInput={(params) => <FormTextField name={name} sx={{ mt: '1rem' }} fullWidth {...params} />}
         InputAdornmentProps={{
           sx: {
             '& .MuiSvgIcon-root': {
