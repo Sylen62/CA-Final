@@ -48,6 +48,17 @@ const ListingsService = new (class ListingsService {
     }
   }
 
+  async getJobOfferById(offerId) {
+    try {
+      const response = await this.requester.get(`/jobOffers/offer?id=${offerId}`);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+      throw new Error(error.response.data.message);
+    }
+  }
+
   // async getCandidatesInfo(id) {
   //   try {
   //     const response = await this.requester.get(`/job-offers/employer/${id}`, {

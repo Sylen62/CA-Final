@@ -12,7 +12,7 @@ const routeStructure = [
     childRoutes: [
       { index: true, pageName: 'HomePage' },
       { path: 'jobs', pageName: 'JobPage' },
-      { path: 'jobs/:id', pageName: 'JobPageJob' },
+      { path: 'jobs/:jobId', pageName: 'JobPageJob' },
       { path: 'candidates', pageName: 'CandidatePage' },
       { path: 'candidates/:id', pageName: 'CandidatePageCandidate' },
       { path: 'sign-in', pageName: 'SignInPage', auth: PUBLIC_ONLY },
@@ -21,7 +21,11 @@ const routeStructure = [
       { path: 'employer/profile', pageName: 'EmployerProfilePage', auth: EMPLOYER },
       { path: 'employer/job-offers', pageName: 'EmloyerJobOfferPage', auth: EMPLOYER },
       { path: 'employer/job-offers/:action', pageName: 'EmployerJobOfferAction', auth: EMPLOYER },
-      { path: 'employer/job-offers/:action/:id', pageName: 'EmployerJobOfferAction', auth: EMPLOYER },
+      {
+        path: 'employer/job-offers/:action/:id',
+        pageName: 'EmployerJobOfferAction',
+        auth: EMPLOYER,
+      },
       { path: '*', pageName: 'ErrorPage' },
     ],
   },

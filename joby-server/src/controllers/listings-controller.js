@@ -59,9 +59,24 @@ const getLatestJobOffers = async (_, res) => {
   }
 };
 
+const getJobOfferById = async (req, res) => {
+  const { id } = req.query;
+  console.log(req.query.id);
+  try {
+    const jobOfferDoc = await JobOfferModel.findById(id).populate('user');
+    const offer = new JobOfferViewModel(jobOfferDoc);
+    res.status(200).json({ offer });
+  } catch ({ message }) {
+    res.status(404).send({
+      message,
+    });
+  }
+};
+
 module.exports = {
   getCandidates,
   getLatestCandidates,
   getJobOffers,
   getLatestJobOffers,
+  getJobOfferById,
 };
