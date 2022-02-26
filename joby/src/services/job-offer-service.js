@@ -21,7 +21,19 @@ const JobOfferService = new (class JobOfferService {
 
   async getJobOffers() {
     try {
-      const response = await this.requester.get('/employer/job-offers/');
+      const response = await this.requester.get('/job-offers/');
+      console.log(response);
+      return response;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+
+  async getEmployerJobOffers(id) {
+    try {
+      const response = await this.requester.get(`/job-offers/employer/${id}`, {
+        params: { test: 7 },
+      });
       console.log(response);
       return response;
     } catch (error) {
@@ -31,7 +43,7 @@ const JobOfferService = new (class JobOfferService {
 
   async createJobOffer(body) {
     try {
-      const response = await this.requester.post('/employer/job-offers/create', body);
+      const response = await this.requester.post('/job-offers/create', body);
       console.log(response);
       return true;
     } catch (error) {

@@ -1,9 +1,18 @@
 const express = require('express');
-const { getOffers, createOffer } = require('../controllers/job-offer-controller');
+const {
+  getOffers,
+  getEmployerOffers,
+  getOffer,
+  createOffer,
+} = require('../controllers/job-offer-controller');
 
 const router = express.Router();
 
 router.get('/', getOffers);
+
+router.get('/employer/:employerId', getEmployerOffers);
+
+router.get('/:id', getOffer);
 
 router.post('/create', createOffer);
 

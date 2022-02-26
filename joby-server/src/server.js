@@ -24,7 +24,7 @@ server.use(express.static(PUBLIC_PATH));
 // Response handlers
 server.use('/api/auth', authRouter);
 server.use('/api/users', userRouter);
-server.use('/api/employer/job-offers', jobOfferRouter);
+server.use('/api/job-offers', jobOfferRouter);
 
 server.listen(SERVER_PORT, () => {
   console.log(`puslapis veikia ant ${SERVER_DOMAIN}:${SERVER_PORT}/`);

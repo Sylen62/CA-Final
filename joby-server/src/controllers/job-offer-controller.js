@@ -7,6 +7,19 @@ const getOffers = async (_, res) => {
   res.status(200).json({ offers });
 };
 
+const getEmployerOffers = async (req, res) => {
+  const { employerId } = req.params;
+  const jobOfferDocs = await JobOfferModel.find({ user: employerId });
+  const offers = jobOfferDocs.map((jobOfferDoc) => new JobOfferViewModel(jobOfferDoc));
+  res.status(200).json({ offers });
+};
+
+const getOffer = async (req, res) => {
+  const jobOfferDocs = await JobOfferModel.find().populate('user');
+  const offers = jobOfferDocs.map((jobOfferDoc) => new JobOfferViewModel(jobOfferDoc));
+  res.status(200).json({ offers });
+};
+
 const createOffer = async (req, res) => {
   const {
     user,
@@ -41,5 +54,7 @@ const createOffer = async (req, res) => {
 
 module.exports = {
   getOffers,
+  getEmployerOffers,
+  getOffer,
   createOffer,
 };
