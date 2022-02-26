@@ -50,7 +50,7 @@ const AuthForm = ({
         <FormButton disabled={!isValid}>
           {
             loading
-              ? <CircularProgress color="inherit" />
+              ? <CircularProgress sx={(theme) => ({ color: theme.palette.common.black })} />
               : title
           }
         </FormButton>

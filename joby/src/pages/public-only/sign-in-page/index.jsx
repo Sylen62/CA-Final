@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Grid, TextField } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
@@ -9,52 +8,8 @@ import routes from '../../../routing/routes';
 import { login } from '../../../store/auth';
 import AuthForm from '../../../components/auth-form';
 import AuthService from '../../../services/auth-service';
-
-const StyledTextField = styled(TextField)(({ theme }) => ({
-  '& .MuiInputLabel-root': {
-    // color: theme.palette.secondary.main,
-    color: theme.palette.common.white,
-  },
-  '& label.Mui-focused': {
-    // color: theme.palette.secondary.main,
-    color: theme.palette.common.white,
-  },
-  '& input': {
-    // color: theme.palette.secondary.main,
-    color: theme.palette.common.white,
-  },
-  '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-    // borderColor: theme.palette.secondary.main,
-    borderColor: theme.palette.common.white,
-  },
-  '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline .Mui-Error': {
-    // borderColor: 'orange',
-    borderColor: theme.palette.common.white,
-    // Kazkodel isvis nerodo tada
-  },
-  '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-    // border: `2px solid ${theme.palette.secondary.main}`,
-    border: `2px solid ${theme.palette.common.white}`,
-  },
-  '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-    // borderColor: theme.palette.secondary.main,
-    borderColor: theme.palette.common.white,
-  },
-  '& input:-webkit-autofill': {
-    WebkitBoxShadow: `0 0 0 100px ${theme.palette.primary.main} inset`,
-    // WebkitTextFillColor: theme.palette.secondary.main,
-    WebkitTextFillColor: theme.palette.common.white,
-  },
-}));
-
-const StyledAlert = styled(Alert)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
-  border: '2px groove red',
-  color: 'red',
-  '& .MuiAlert-icon': {
-    color: 'red',
-  },
-}));
+import FormTextField from '../../../components/text-field/form-text-field';
+import AuthFormAlert from '../../../components/alerts/auth-form-alert';
 
 const validationSchema = yup.object({
   email: yup.string()
@@ -118,12 +73,10 @@ const SignInPage = () => {
       isValid={isValid && dirty}
       onSubmit={handleSubmit}
     >
-      <StyledAlert severity="error" sx={{ mb: 4, display: error ? 'flex' : 'none' }}>
-        {error}
-      </StyledAlert>
+      <AuthFormAlert error={error} sx={{ mb: 4, display: error ? 'flex' : 'none' }} />
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <StyledTextField
+          <FormTextField
             name="email"
             variant="outlined"
             label="El. paštas"
@@ -135,11 +88,10 @@ const SignInPage = () => {
             disabled={isSubmitting}
             fullWidth
             autoComplete="email"
-            // autoFocus
           />
         </Grid>
         <Grid item xs={12} sx={{ mb: 4 }}>
-          <StyledTextField
+          <FormTextField
             name="password"
             variant="outlined"
             label="Slaptažodis"

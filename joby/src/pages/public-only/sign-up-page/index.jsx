@@ -141,11 +141,16 @@ const SignUpPage = () => {
 
   let emailEndornment;
   if (emailCheckLoading) {
-    emailEndornment = <CircularProgress size={24} />;
+    emailEndornment = (
+      <CircularProgress
+        sx={(theme) => ({ color: theme.palette.common.white })}
+        size={24}
+      />
+    );
   } else if (!values.emailChecked) {
     emailEndornment = null;
   } else if (values.emailAvailable) {
-    emailEndornment = <CheckCircleIcon color="success" />;
+    emailEndornment = <CheckCircleIcon sx={(theme) => ({ color: theme.palette.secondary.main })} />;
   } else {
     emailEndornment = <ErrorIcon color="error" />;
   }
