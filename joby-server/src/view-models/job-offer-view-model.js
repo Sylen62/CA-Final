@@ -1,4 +1,5 @@
 const UserViewModel = require('./user-view-model');
+const moment = require('moment');
 
 class JobOfferViewModel {
   constructor({
@@ -22,6 +23,7 @@ class JobOfferViewModel {
     this.salaryType = salaryType;
     this.activeFrom = activeFrom;
     this.activeUntill = activeUntill;
+    this.daysLeft = moment(activeUntill).diff(moment(), 'days');
     this.description = description;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;

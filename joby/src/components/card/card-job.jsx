@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import {
-  CardContent, CardHeader, Typography, Box, Card, CardMedia, CardActions,
+  CardContent, CardHeader, Typography, Box, Card, CardMedia, CardActions, Divider,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import { Image } from 'mui-image';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   margin: 'auto',
@@ -16,18 +17,17 @@ const StyledCard = styled(Card)(({ theme }) => ({
 
 const StyledCardMedia = styled(CardMedia)(() => ({
   height: '200px',
-  maxWidth: '280px',
-  objectFit: 'cover',
-  objectPosition: 'center',
+  maxWidth: '300px',
   padding: '10px',
   borderRadius: '20px',
+  margin: 'auto',
 }));
 
-const CardJob = ({ data, maxWidth }) => {
+const CardJob = ({ data }) => {
   const cardTextRef = useRef(null);
   const {
-    id, user: { image, employerName }, offerName, salaryFrom, salaryTo, salaryType, city,
-    activeUntill,
+    id, user: { image, employerName }, offerName, salaryFrom, salaryTo, salaryType,
+    daysLeft,
   } = data;
 
   useEffect(() => {
@@ -37,6 +37,7 @@ const CardJob = ({ data, maxWidth }) => {
       cardTextRef.current.innerHTML = `${wordArray.join(' ')}...`;
     }
   }, [cardTextRef]);
+
   return (
     <StyledCard>
       <Link
@@ -47,7 +48,19 @@ const CardJob = ({ data, maxWidth }) => {
           color: 'white',
         }}
       >
-        <StyledCardMedia component="img" src={image} sx={{ maxWidth }} />
+        <StyledCardMedia>
+          <Image
+            src={image}
+            duration={500}
+            height="100%"
+            width="100%"
+            sx={{
+              borderRadius: '10px',
+              objectPosition: 'center',
+            }}
+          />
+        </StyledCardMedia>
+        <Divider variant="middle" sx={(theme) => ({ backgroundColor: theme.palette.secondary.main })} />
         <Box sx={{
           height: '260px', position: 'relative', display: 'flex', flexDirection: 'column',
         }}
@@ -56,7 +69,7 @@ const CardJob = ({ data, maxWidth }) => {
           <CardContent
             ref={cardTextRef}
             sx={{
-              py: '10px', display: 'flex', alignItems: 'center', height: '135px',
+              py: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '135px',
             }}
           >
             <Typography variant="h6" textAlign="center">
@@ -84,11 +97,12 @@ const CardJob = ({ data, maxWidth }) => {
                 <Typography variant="caption">{salaryType}</Typography>
               </Box>
               <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="body1">{city}</Typography>
+                <Typography variant="body1">Vilnius</Typography>
                 <Typography variant="caption">
                   Left
                   {' '}
-                  {activeUntill}
+                  {daysLeft}
+                  {' '}
                   d.
                 </Typography>
               </Box>

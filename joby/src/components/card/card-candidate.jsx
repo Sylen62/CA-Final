@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
 import {
-  Box, Card, CardActions, CardContent, CardHeader, CardMedia, Typography,
+  Box, Card, CardActions, CardContent, CardHeader, CardMedia, Divider, Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import { Image } from 'mui-image';
 import SocialLinksContainer from '../containers/social-links-container';
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -18,7 +20,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
 
 const StyledCardMedia = styled(CardMedia)(() => ({
   height: '200px',
-  maxWidth: '280px',
+  maxWidth: '300px',
   objectFit: 'cover',
   objectPosition: 'center',
   padding: '10px',
@@ -47,7 +49,20 @@ const CardCandidate = ({ data, maxWidth, height }) => {
         }}
       >
         <Box sx={{ position: 'relative', height: '100%' }}>
-          <StyledCardMedia component="img" src={data.image} sx={{ maxWidth }} />
+          {/* <StyledCardMedia component="img" src={data.image} sx={{ maxWidth }} /> */}
+          <StyledCardMedia>
+            <Image
+              src={data.image || 'undefined'}
+              duration={500}
+              height="100%"
+              width="100%"
+              sx={{
+                borderRadius: '10px',
+                objectPosition: 'center',
+              }}
+            />
+          </StyledCardMedia>
+          <Divider variant="middle" sx={(theme) => ({ backgroundColor: theme.palette.secondary.main })} />
           <CardHeader title={`${data.name} ${data.surname}`} sx={{ py: '10px', textAlign: 'center' }} />
           <CardContent
             ref={cardTextRef}
@@ -55,7 +70,7 @@ const CardCandidate = ({ data, maxWidth, height }) => {
               py: '10px',
               display: 'flex',
               alignItems: 'center',
-              height,
+              height: '200px',
             }}
           >
             {/* Max 300 char */}
