@@ -25,7 +25,6 @@ const StyledCardMedia = styled(CardMedia)(() => ({
 
 const CardJob = ({ data, maxWidth }) => {
   const cardTextRef = useRef(null);
-  console.log(data);
   const {
     id, user: { image, employerName }, offerName, salaryFrom, salaryTo, salaryType, city,
     activeUntill,

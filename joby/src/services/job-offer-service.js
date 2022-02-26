@@ -19,15 +19,15 @@ const JobOfferService = new (class JobOfferService {
     });
   }
 
-  async getJobOffers() {
-    try {
-      const response = await this.requester.get('/job-offers/');
-      console.log(response);
-      return response;
-    } catch (error) {
-      throw new Error(error.response.data.message);
-    }
-  }
+  // async getJobOffers() {
+  //   try {
+  //     const response = await this.requester.get('/job-offers/');
+  //     console.log(response);
+  //     return response;
+  //   } catch (error) {
+  //     throw new Error(error.response.data.message);
+  //   }
+  // }
 
   async getEmployerJobOffers(id) {
     try {

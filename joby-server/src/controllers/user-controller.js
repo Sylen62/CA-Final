@@ -8,12 +8,6 @@ const getUser = async (_, res) => {
   res.status(200).json({ users });
 };
 
-const getEmployers = async (_, res) => {
-  const userDocs = await UserModel.find({ role: 'EMPLOYER' });
-  const users = userDocs.map((userDoc) => new UserViewModel(userDoc));
-  res.status(200).json({ users });
-};
-
 const getCandidates = async (_, res) => {
   const userDocs = await UserModel.find({ role: 'CANDIDATE' });
   const users = userDocs.map((userDoc) => new UserViewModel(userDoc));
@@ -103,6 +97,5 @@ module.exports = {
   updateUser,
   updateUserImage,
   updateEmployerDescription,
-  getEmployers,
   getCandidates,
 };

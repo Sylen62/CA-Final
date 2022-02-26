@@ -5,8 +5,9 @@ import { SwiperSlide } from 'swiper/react';
 import CardJob from '../../components/card/card-job';
 import CardSwiper from '../../components/card-swiper';
 import LatestListingsContainer from '../../components/container/latest-listings-container';
-import JobOfferService from '../../services/job-offer-service';
+// import JobOfferService from '../../services/job-offer-service';
 import NoListingsContainer from '../../components/container/no-listings-container';
+import ListingsService from '../../services/listings-service';
 
 // const data = [
 //   {
@@ -90,7 +91,7 @@ const HomePageLatestJobs = () => {
   useEffect(() => {
     setLoading(true);
     (async () => {
-      const fetchedJobOffers = await JobOfferService.getJobOffers();
+      const fetchedJobOffers = await ListingsService.getLatestJobOffers();
       setJobOffers(fetchedJobOffers.data.offers);
       setLoading(false);
     })();

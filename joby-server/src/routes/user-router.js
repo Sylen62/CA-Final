@@ -1,13 +1,11 @@
 const express = require('express');
 const authMiddleware = require('../middlewares/auth-middleware');
-// const adminMiddleware = require('../middlewares/admin-middleware');
 const { uploadSingleMiddleware } = require('../middlewares/upload-middleware');
 const {
   getUser,
   updateUser,
   updateUserImage,
   updateEmployerDescription,
-  getEmployers,
   getCandidates,
 } = require('../controllers/user-controller');
 
@@ -18,8 +16,6 @@ router.use(authMiddleware);
 
 // router.get('/', adminMiddleware, getUsers);
 router.get('/', getUser); // nereikia
-
-router.get('/employers', getEmployers); // nereikia
 
 router.get('/candidates', getCandidates); // perkelt i candidate listings
 

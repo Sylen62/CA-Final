@@ -39,7 +39,7 @@ const CardCandidate = ({ data, maxWidth, height }) => {
   return (
     <StyledCard>
       <Link
-        to={`/candidates/${1}`}
+        to={`/candidates/${data.id}`}
         style={{
           textDecoration: 'none',
           textTransform: 'none',
@@ -47,8 +47,8 @@ const CardCandidate = ({ data, maxWidth, height }) => {
         }}
       >
         <Box sx={{ position: 'relative', height: '100%' }}>
-          <StyledCardMedia component="img" src={data.candidateLogo} sx={{ maxWidth }} />
-          <CardHeader title={data.candidateName} sx={{ py: '10px', textAlign: 'center' }} />
+          <StyledCardMedia component="img" src={data.image} sx={{ maxWidth }} />
+          <CardHeader title={`${data.name} ${data.surname}`} sx={{ py: '10px', textAlign: 'center' }} />
           <CardContent
             ref={cardTextRef}
             sx={{
@@ -63,7 +63,7 @@ const CardCandidate = ({ data, maxWidth, height }) => {
               variant="body2"
               textAlign="center"
             >
-              {data.candidateLookingFor}
+              {data.candidateShortDescription ?? 'No description'}
             </Typography>
           </CardContent>
           <CardActions sx={{ position: 'relative', height: '60px' }} />
@@ -74,10 +74,10 @@ const CardCandidate = ({ data, maxWidth, height }) => {
       }}
       >
         <SocialLinksContainer
-          linkedIn="https://www.linkedin.com/"
-          facebook="https://lt-lt.facebook.com/"
-          instagram="https://twitter.com/"
-          twitter="https://www.instagram.com/"
+          linkedIn={data.linkedIn}
+          facebook={data.facebook}
+          instagram={data.instagram}
+          twitter={data.twitter}
         />
       </Box>
     </StyledCard>
