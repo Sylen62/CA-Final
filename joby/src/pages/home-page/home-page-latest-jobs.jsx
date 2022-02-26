@@ -4,9 +4,9 @@ import { Typography } from '@mui/material';
 import { SwiperSlide } from 'swiper/react';
 import CardJob from '../../components/card/card-job';
 import CardSwiper from '../../components/card-swiper';
-import CardSwiperContainer from '../../components/container/card-swiper-container';
 import LatestListingsContainer from '../../components/container/latest-listings-container';
 import JobOfferService from '../../services/job-offer-service';
+import NoListingsContainer from '../../components/container/no-listings-container';
 
 // const data = [
 //   {
@@ -91,7 +91,6 @@ const HomePageLatestJobs = () => {
     setLoading(true);
     (async () => {
       const fetchedJobOffers = await JobOfferService.getJobOffers();
-      console.log(fetchedJobOffers.data.offers);
       setJobOffers(fetchedJobOffers.data.offers);
       setLoading(false);
     })();
@@ -99,15 +98,17 @@ const HomePageLatestJobs = () => {
   return (
     <LatestListingsContainer>
       <Typography component="h2" variant="h3" textAlign="center" sx={{ mb: '3rem' }}>Latest Job Offers</Typography>
-      <CardSwiperContainer>
+      { !loading && jobOffers ? (
         <CardSwiper>
-          { !loading ? jobOffers?.map((jobData) => (
+          {jobOffers.map((jobData) => (
             <SwiperSlide key={`${jobData.id}`}>
               <CardJob data={jobData} />
             </SwiperSlide>
-          )) : null}
+          ))}
         </CardSwiper>
-      </CardSwiperContainer>
+      ) : (
+        <NoListingsContainer>Currently there are no job offers. Come back later.</NoListingsContainer>
+      )}
     </LatestListingsContainer>
   );
 };
