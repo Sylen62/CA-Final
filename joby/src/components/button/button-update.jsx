@@ -1,11 +1,10 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const StyledButton = styled(Button)(({ theme }) => ({
   color: theme.palette.primary.main,
   backgroundColor: theme.palette.secondary.main,
-  // backgroundColor: theme.palette.common.white,
   border: 'none',
   fontWeight: '600',
   marginTop: '10px',
@@ -13,24 +12,22 @@ const StyledButton = styled(Button)(({ theme }) => ({
   '&:hover': {
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.secondary.main,
-    // backgroundColor: theme.palette.common.white,
     border: 'none',
-    // '-webkit-text-decoration': 'none',
     textDecoration: 'none',
   },
   '&.Mui-disabled': {
-    // color: theme.palette.secondary.main,
     color: theme.palette.common.white,
-    backgroundColor: theme.palette.primary.main,
-    // borderColor: theme.palette.secondary.main,
-    borderColor: theme.palette.common.white,
+    backgroundColor: theme.palette.secondary.main,
+    borderColor: theme.palette.secondary.main,
     borderRadius: '4px',
   },
 }));
 
-const ButtonUpdate = ({ btnText, ...restProps }) => (
-  <StyledButton {...restProps}>
-    {btnText}
+const ButtonUpdate = ({ btnText, loading, ...restProps }) => (
+  <StyledButton size="large" fullWidth disabled={loading} {...restProps}>
+    { loading
+      ? <CircularProgress size="26px" sx={(theme) => ({ color: theme.palette.common.black })} />
+      : btnText}
   </StyledButton>
 );
 

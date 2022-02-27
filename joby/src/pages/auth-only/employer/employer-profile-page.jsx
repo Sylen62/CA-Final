@@ -19,17 +19,22 @@ import ButtonOutlined from '../../../components/button/button-outlined';
 import ButtonContained from '../../../components/button/button-contained';
 import ProfileService from '../../../services/profile-service';
 import UserProfileForm from '../../../components/form/user-profile-form';
-
-// eslint-disable-next-line max-len
-// const htmlData = '<h2>Lorem</h2><p></p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil nisi sit, maiores commodi explicabo nobis perspiciatis id amet omnis culpa fugit a vitae, unde minima, nemo dolore consequuntur dignissimos? Iste fugit omnis nisi fuga nam asperiores reprehenderit, ratione voluptatum quod natus aut alias dicta ut reiciendis quae fugiat vel dolorum necessitatibus praesentium molestias. Sed quaerat laudantium, ab rerum cumque blanditiis similique voluptatem dicta veritatis esse at omnis nesciunt voluptate possimus, eum eligendi dolorem doloribus impedit sint. </p><p></p><h2>Similique </h2><ul><li>Sed quaerat laudantium.</li><li>Sapiente voluptatem!</li><li>Deserunt natus autem.</li></ul><p></p><p>Sapiente ullam ipsa provident quaerat, illo, alias earum sint cupiditate eius, recusandae commodi facilis odit fugiat qui ipsam nostrum officiis placeat assumenda velit perferendis voluptatem maxime reiciendis dicta nesciunt. Ipsum praesentium, minima ratione alias assumenda ullam eligendi, ea quisquam facere esse iusto debitis omnis autem eius in voluptatibus cumque! Dolor voluptates expedita recusandae ratione, suscipit vel! Sit magni blanditiis, sint ea facilis id beatae veritatis tenetur voluptatibus dolorum cumque autem repellat accusamus dicta, repellendus doloribus amet voluptatem perspiciatis nihil? Nulla, deleniti facere inventore, illum dicta facilis suscipit nostrum architecto enim ut laboriosam nam fugiat eaque consectetur aliquam assumenda cupiditate veniam soluta ab non sapiente voluptatem! Facere labore soluta voluptatum id ratione natus fugiat perspiciatis. Deserunt natus autem velit quae vitae ad corporis animi ut!</p>';
+import InfoSnackbar from '../../../components/snackbar';
 
 const EmployerProfilePage = () => {
   const { user } = useSelector(authSelector);
   const [image, setImage] = useState(user.image);
   const [editorContent, setEditorContent] = useState();
   const [initEditorContent, setInitEditorContent] = useState();
+  const [submiting, setSubmiting] = useState(false);
+  const [infoSnackbar, setInfoSnackbar] = useState({ open: false, success: false, message: '' });
   const uploadInputRef = useRef(null);
   const textEditorControls = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'undo', 'redo', 'numberList', 'bulletList', 'clear'];
+
+  const handleSnackbarClose = (_, reason) => {
+    if (reason === 'clickaway') return;
+    setInfoSnackbar({ open: false });
+  };
 
   const validationSchema = yup.object({
     employerName: yup.string()
@@ -57,7 +62,10 @@ const EmployerProfilePage = () => {
   };
 
   const onSubmit = async (data) => {
-    await ProfileService.updateUserData(data);
+    setSubmiting(true);
+    const { success, message } = await ProfileService.updateUserData(data);
+    setInfoSnackbar({ open: true, success, message });
+    setSubmiting(false);
   };
 
   const {
@@ -67,8 +75,8 @@ const EmployerProfilePage = () => {
     errors,
     touched,
     values,
-    // resetForm,
-    // isSubmitting,
+    resetForm,
+    isSubmitting,
     // isValid,
     // dirty,
     // setFieldValue,
@@ -78,6 +86,10 @@ const EmployerProfilePage = () => {
     validationSchema,
     onSubmit,
   });
+
+  useEffect(() => {
+    resetForm(initialValues);
+  }, [isSubmitting]);
 
   useEffect(() => {
     if (!user.employerDescription) return;
@@ -90,22 +102,27 @@ const EmployerProfilePage = () => {
     setEditorContent(convertToHTML(data.getCurrentContent()));
   };
 
-  const handleSave = async () => {
-    await ProfileService.updateEmployerDescription({ t: JSON.stringify(editorContent) });
+  const handleDescriptionSubmit = async (action) => {
+    setSubmiting(true);
+    if (action) setInitEditorContent('');
+    const { success, message } = await ProfileService.updateEmployerDescription({
+      description: action ? '' : JSON.stringify(editorContent),
+    });
+    setInfoSnackbar({ open: true, success, message });
+    setSubmiting(false);
   };
 
   const handleImageUpload = async (event) => {
+    setSubmiting(true);
     setImage(URL.createObjectURL(event.target.files[0]));
-    await ProfileService.updateImage(event.target.files);
+    const { success, message } = await ProfileService.updateImage(event.target.files);
+    setInfoSnackbar({ open: true, success, message });
+    setSubmiting(false);
   };
-
-  // const handleUserDetailsUpdate = (event) => {
-  //   event.preventDefault();
-  //   console.log(event.target.value);
-  // };
 
   return (
     <MainContentContainer>
+      <InfoSnackbar {...infoSnackbar} handleSnackbarClose={handleSnackbarClose} />
       <Typography component="h2" variant="h4" textAlign="center">Profile</Typography>
       <SecondaryContentContainer>
         <Grid container spacing={1}>
@@ -113,12 +130,12 @@ const EmployerProfilePage = () => {
             <ImageContainer>
               <Image src={image || null} />
             </ImageContainer>
-            <ButtonUpdate onClick={() => uploadInputRef.current.click()} size="large" btnText="Change image" fullWidth />
+            <ButtonUpdate onClick={() => uploadInputRef.current.click()} loading={isSubmitting || submiting} btnText="Change image" />
             <input ref={uploadInputRef} onChange={handleImageUpload} type="file" accept="image/*" hidden />
           </Grid>
           <Grid item xs={12} md={7}>
             <UserProfileForm onSubmit={handleSubmit}>
-              <Grid container spacing={2} sx={{ mt: { xs: '1rem', md: 0 } }}>
+              <Grid container spacing={2} sx={{ pt: { xs: '1rem', md: '0.5rem' } }}>
                 <Grid item xs={12} sm={6} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <FormTextField
                     name="employerName"
@@ -174,7 +191,7 @@ const EmployerProfilePage = () => {
                     error={touched.repeatNewPassword && Boolean(errors.repeatNewPassword)}
                     helperText={touched.repeatNewPassword && errors.repeatNewPassword}
                   />
-                  <ButtonUpdate type="submit" size="large" btnText="Update accoount" fullWidth sx={{ mt: '1rem' }} />
+                  <ButtonUpdate loading={isSubmitting || submiting} type="submit" btnText="Update accoount" sx={{ mt: '1rem' }} />
                 </Grid>
               </Grid>
             </UserProfileForm>
@@ -190,8 +207,8 @@ const EmployerProfilePage = () => {
           onChange={(data) => handleDescriptionChange(data)}
         />
         <Box sx={{ alignSelf: 'end', mt: '2rem' }}>
-          <ButtonOutlined btnText="Delete" sx={{ mr: '1rem' }} onClick={() => setInitEditorContent('')} />
-          <ButtonContained btnText="Save" onClick={handleSave} />
+          <ButtonOutlined loading={submiting} btnText="Delete" sx={{ mr: '1rem' }} onClick={() => handleDescriptionSubmit(true)} />
+          <ButtonContained loading={submiting} btnText="Save" onClick={() => handleDescriptionSubmit(false)} />
         </Box>
       </SecondaryContentContainer>
     </MainContentContainer>

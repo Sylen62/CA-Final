@@ -22,23 +22,28 @@ const ProfileService = new (class ProfileService {
 
   async updateUserData(body) {
     const token = ProfileService.validateToken();
-    const { data } = await this.requester.patch('/users/employer/profile', body, {
+    const {
+      data: { success, message, user },
+    } = await this.requester.patch('/users/employer/profile', body, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log('a', data.user);
-    store.dispatch(updateUser({ user: data.user }));
+    if (success) store.dispatch(updateUser({ user }));
+    return { success, message };
   }
 
   async updateEmployerDescription(body) {
     const token = ProfileService.validateToken();
-    const { data } = await this.requester.patch('/users/employer/profile/description', body, {
+    const {
+      data: { success, message, user },
+    } = await this.requester.patch('/users/employer/profile/description', body, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    store.dispatch(updateUser({ user: data.user }));
+    if (success) store.dispatch(updateUser({ user }));
+    return { success, message };
   }
 
   async updateImage(files) {
@@ -47,15 +52,17 @@ const ProfileService = new (class ProfileService {
 
     formData.append('files', files[0]);
 
-    const { data } = await this.requester.patch('users/image', formData, {
+    const {
+      data: { success, message, user },
+    } = await this.requester.patch('users/image', formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
       },
     });
 
-    store.dispatch(updateUser({ user: data.user }));
-    return true;
+    if (success) store.dispatch(updateUser({ user }));
+    return { success, message };
   }
 })();
 

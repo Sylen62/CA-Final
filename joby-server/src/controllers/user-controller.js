@@ -1,6 +1,6 @@
 const UserModel = require('../models/user-model');
 const UserViewModel = require('../view-models/user-view-model');
-const { hashPasswordAsync, comparePasswordsAsync } = require('../helpers/hash');
+const { hashPasswordAsync } = require('../helpers/hash');
 
 const getUser = async (_, res) => {
   const userDocs = await UserModel.find();
@@ -41,14 +41,15 @@ const updateUser = async (req, res) => {
 
     const updatedUserDoc = await UserModel.findOne({ email });
     const user = new UserViewModel(updatedUserDoc);
-    console.log(user);
 
     res.status(200).json({
-      message: 'User updated',
+      success: true,
+      message: 'Profile successfully updated',
       user,
     });
   } catch ({ message }) {
     res.status(404).send({
+      success: false,
       message,
     });
   }
@@ -58,37 +59,47 @@ const updateUserImage = async (req, res) => {
   const { filename } = req.file;
   const { email } = req.user;
   try {
-    const userDoc = await UserModel.findOneAndUpdate(
+    await UserModel.findOneAndUpdate(
       { email }, // Pagal ką surasti
       { image: filename }, // Ką atnaujinti
       { new: false } // sulaukti keičiamo dokumento
     );
+
+    const updatedUserDoc = await UserModel.findOne({ email });
+    const user = new UserViewModel(updatedUserDoc);
+
     res.status(200).send({
+      success: true,
       message: 'Profile picture successfully updated',
-      user: new UserViewModel(userDoc),
+      user,
     });
   } catch ({ message }) {
     res.status(404).send({
+      success: false,
       message,
     });
   }
 };
 
 const updateEmployerDescription = async (req, res) => {
-  const { t } = req.body;
-  console.log(t);
-  const props = { employerDescription: t };
+  const { email } = req.user;
+  console.log(req.user);
+  const { description } = req.body;
+  const props = { employerDescription: description };
   try {
-    const userDoc = await UserModel.findOneAndUpdate({ email: req.user.email }, props, {
-      new: false,
-    });
+    await UserModel.findOneAndUpdate({ email }, props, { new: false });
+
+    const updatedUserDoc = await UserModel.findOne({ email });
+    const user = new UserViewModel(updatedUserDoc);
 
     res.status(200).json({
-      message: 'User updated',
-      user: new UserViewModel(userDoc),
+      success: true,
+      message: 'Profile description successfully updated',
+      user,
     });
   } catch ({ message }) {
     res.status(404).send({
+      success: false,
       message,
     });
   }
