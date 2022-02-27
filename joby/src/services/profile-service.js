@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AuthService from './auth-service';
-// import store from '../store';
-// import { updateUser } from '../store/auth';
+import store from '../store';
+import { updateUser } from '../store/auth';
 
 const ProfileService = new (class ProfileService {
   static validateToken() {
@@ -27,8 +27,8 @@ const ProfileService = new (class ProfileService {
         Authorization: `Bearer ${token}`,
       },
     });
-    // store.dispatch(updateUser({ user: data.user }));
-    console.log(data);
+    console.log('a', data.user);
+    store.dispatch(updateUser({ user: data.user }));
   }
 
   async updateEmployerDescription(body) {
@@ -38,8 +38,7 @@ const ProfileService = new (class ProfileService {
         Authorization: `Bearer ${token}`,
       },
     });
-    // store.dispatch(updateUser({ user: data.user }));
-    console.log(data);
+    store.dispatch(updateUser({ user: data.user }));
   }
 
   async updateImage(files) {
@@ -55,7 +54,7 @@ const ProfileService = new (class ProfileService {
       },
     });
 
-    console.log('c ', data); // priskirt user store.dispatch(updateUser({ user: data.user }));
+    store.dispatch(updateUser({ user: data.user }));
     return true;
   }
 })();

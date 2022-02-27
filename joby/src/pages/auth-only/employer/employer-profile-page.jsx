@@ -37,7 +37,6 @@ const EmployerProfilePage = () => {
       .min(2, 'At least 2 letters')
       .max(32, 'Most 32 letters'),
     newPassword: yup.string()
-      // .required('Is required')
       .min(8, 'At least 8 symbols')
       .max(32, 'Most 32 symbols')
       .matches(/^.*[A-ZĄČĘĖĮŠŲŪŽ]+.*$/, 'Atleast one capital letter')
@@ -68,7 +67,7 @@ const EmployerProfilePage = () => {
     errors,
     touched,
     values,
-    resetForm,
+    // resetForm,
     // isSubmitting,
     // isValid,
     // dirty,
@@ -81,12 +80,6 @@ const EmployerProfilePage = () => {
   });
 
   useEffect(() => {
-    console.log('a');
-    resetForm({
-      values: {
-        ...initialValues,
-      },
-    });
     if (!user.employerDescription) return;
     const data = convertFromHTML(JSON.parse(user.employerDescription));
     const state = ContentState.createFromBlockArray(data.contentBlocks, data.entityMap);
@@ -98,7 +91,6 @@ const EmployerProfilePage = () => {
   };
 
   const handleSave = async () => {
-    console.log(editorContent);
     await ProfileService.updateEmployerDescription({ t: JSON.stringify(editorContent) });
   };
 
@@ -119,7 +111,7 @@ const EmployerProfilePage = () => {
         <Grid container spacing={1}>
           <Grid item xs={12} md={4.7} sx={{ display: { xs: 'flex', md: 'block', lg: 'block' }, alignItems: 'center', flexDirection: 'column' }}>
             <ImageContainer>
-              <Image src={image || 'https://unsplash.it/500/400'} />
+              <Image src={image || null} />
             </ImageContainer>
             <ButtonUpdate onClick={() => uploadInputRef.current.click()} size="large" btnText="Change image" fullWidth />
             <input ref={uploadInputRef} onChange={handleImageUpload} type="file" accept="image/*" hidden />
