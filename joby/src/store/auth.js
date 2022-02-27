@@ -24,10 +24,14 @@ const authSlice = createSlice({
       state.user = null;
       state.redirectTo = null;
     },
+    updateUser(state, { payload }) {
+      state.user = payload.user;
+    },
   },
 });
 
-export const { login, logout, authFailed } = authSlice.actions;
+// eslint-disable-next-line object-curly-newline
+export const { login, logout, authFailed, updateUser } = authSlice.actions;
 
 export const authSelector = (state) => state.auth;
 export const loggedInSelector = (state) => state.auth.loggedIn;
