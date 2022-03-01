@@ -8,6 +8,12 @@ class UserViewModel {
     surname,
     image,
     employerDescription,
+    candidateShortDescription,
+    candidateFullDescription,
+    linkedIn,
+    facebook,
+    twitter,
+    instagram,
     createdAt,
     updatedAt,
   }) {
@@ -15,14 +21,38 @@ class UserViewModel {
     this.id = _id;
     this.email = email;
     this.role = role;
-    this.employerName = employerName;
-    this.name = name;
-    this.surname = surname;
+    if (employerName) {
+      this.employerName = employerName;
+    }
+    if (name) {
+      this.name = name;
+    }
+    if (surname) {
+      this.surname = surname;
+    }
     if (image) {
       this.image = `${SERVER_DOMAIN}:${SERVER_PORT}/${IMG_FOLDER_NAME}/${image}`;
     }
     if (employerDescription) {
       this.employerDescription = employerDescription;
+    }
+    if (candidateShortDescription) {
+      this.candidateShortDescription = candidateShortDescription;
+    }
+    if (candidateFullDescription) {
+      this.candidateFullDescription = candidateFullDescription;
+    }
+    if (linkedIn) {
+      this.linkedIn = linkedIn;
+    }
+    if (facebook) {
+      this.facebook = facebook;
+    }
+    if (twitter) {
+      this.twitter = twitter;
+    }
+    if (instagram) {
+      this.instagram = instagram;
     }
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;

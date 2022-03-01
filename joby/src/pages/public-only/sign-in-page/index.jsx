@@ -79,7 +79,7 @@ const SignInPage = () => {
           <FormTextField
             name="email"
             variant="outlined"
-            label="El. paštas"
+            label="Email"
             value={values.email}
             error={touched.email && Boolean(errors.email)}
             helperText={touched.email && errors.email}
@@ -94,7 +94,7 @@ const SignInPage = () => {
           <FormTextField
             name="password"
             variant="outlined"
-            label="Slaptažodis"
+            label="Password"
             type="password"
             value={values.password}
             error={touched.password && Boolean(errors.password)}
