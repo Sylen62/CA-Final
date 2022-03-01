@@ -1,6 +1,7 @@
 const UserModel = require('../models/user-model');
 const UserViewModel = require('../view-models/user-view-model');
 const { hashPasswordAsync } = require('../helpers/hash');
+const { deleteFile } = require('../helpers/file-helpers');
 
 const getUsedProps = (expectedProps) => {
   const usedProps = Object.entries(expectedProps).reduce((result, [name, value]) => {
@@ -56,19 +57,25 @@ const updateUserImage = async (req, res) => {
   const { filename } = req.file;
   const { email } = req.user;
   try {
+    const oldUserDoc = await UserModel.findOne({ email });
+
     await UserModel.findOneAndUpdate(
       { email }, // Pagal ką surasti
       { image: filename }, // Ką atnaujinti
       { new: false } // sulaukti keičiamo dokumento
     );
 
+    const { PUBLIC_PATH, IMG_FOLDER_NAME } = process.env;
+    const imgPath = `${PUBLIC_PATH}/${IMG_FOLDER_NAME}/${oldUserDoc.image}`;
+    deleteFile(imgPath);
+
     const updatedUserDoc = await UserModel.findOne({ email });
-    const user = new UserViewModel(updatedUserDoc);
+    const updatedUser = new UserViewModel(updatedUserDoc);
 
     res.status(200).send({
       success: true,
       message: 'Profile picture successfully updated',
-      user,
+      user: updatedUser,
     });
   } catch ({ message }) {
     res.status(404).send({
