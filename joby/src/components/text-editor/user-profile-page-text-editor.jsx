@@ -16,8 +16,8 @@ const UserProfilePageTextEditor = ({
   const textEditorControls = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'undo', 'redo', 'numberList', 'bulletList', 'clear'];
 
   useEffect(() => {
-    if (!user.candidateFullDescription) return;
-    const data = convertFromHTML(JSON.parse(user.candidateFullDescription));
+    if (!user.fullDescription) return;
+    const data = convertFromHTML(JSON.parse(user.fullDescription));
     const state = ContentState.createFromBlockArray(data.contentBlocks, data.entityMap);
     setInitEditorContent(JSON.stringify(convertToRaw(state)));
   }, []);
@@ -30,7 +30,7 @@ const UserProfilePageTextEditor = ({
     setSubmiting(true);
     if (action) setInitEditorContent('');
     const { success, message } = await ProfileService.updateUser({
-      candidateFullDescription: action ? '' : JSON.stringify(editorContent),
+      fullDescription: JSON.stringify(editorContent),
     });
     setInfoSnackbar({ open: true, success, message });
     setSubmiting(false);

@@ -10,7 +10,7 @@ const CandidateProfilePageUserDescription = ({
   user, setSubmiting, submiting, setInfoSnackbar,
 }) => {
   const initialValues = {
-    candidateShortDescription: user.candidateShortDescription ?? '',
+    shortDescription: user.shortDescription ?? '',
   };
 
   const onSubmit = async (data) => {

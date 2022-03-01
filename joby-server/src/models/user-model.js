@@ -49,15 +49,11 @@ const userSchema = new Mongoose.Schema(
       required: false,
     },
     // user info
-    employerDescription: {
+    shortDescription: {
       type: 'string',
       required: false,
     },
-    candidateShortDescription: {
-      type: 'string',
-      required: false,
-    },
-    candidateFullDescription: {
+    fullDescription: {
       type: 'string',
       required: false,
     },

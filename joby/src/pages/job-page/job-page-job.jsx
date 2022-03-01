@@ -118,10 +118,6 @@ const JobPageJob = () => {
 
   const handleOpenModal = (openModal) => setOpen(openModal);
 
-  // useEffect(() => {
-  //   jobOfferRef.current.innerHTML = data.jobOffer.offer;
-  // }, []);
-
   return (
     <Container maxWidth="lg" sx={{ minHeight: 'calc(100vh - 124px)', py: '3vh' }}>
       { !loading

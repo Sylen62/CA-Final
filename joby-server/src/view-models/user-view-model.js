@@ -7,9 +7,8 @@ class UserViewModel {
     name,
     surname,
     image,
-    employerDescription,
-    candidateShortDescription,
-    candidateFullDescription,
+    shortDescription,
+    fullDescription,
     linkedIn,
     facebook,
     twitter,
@@ -33,14 +32,11 @@ class UserViewModel {
     if (image) {
       this.image = `${SERVER_DOMAIN}:${SERVER_PORT}/${IMG_FOLDER_NAME}/${image}`;
     }
-    if (employerDescription) {
-      this.employerDescription = employerDescription;
+    if (shortDescription) {
+      this.shortDescription = shortDescription;
     }
-    if (candidateShortDescription) {
-      this.candidateShortDescription = candidateShortDescription;
-    }
-    if (candidateFullDescription) {
-      this.candidateFullDescription = candidateFullDescription;
+    if (fullDescription) {
+      this.fullDescription = fullDescription;
     }
     if (linkedIn) {
       this.linkedIn = linkedIn;
