@@ -11,7 +11,6 @@ const ListingsService = new (class ListingsService {
   async getCandidates() {
     try {
       const response = await this.requester.get('/candidates');
-      console.log(response);
       return response;
     } catch (error) {
       throw new Error(error.response.data.message);
@@ -21,7 +20,15 @@ const ListingsService = new (class ListingsService {
   async getLatestCandidates() {
     try {
       const response = await this.requester.get('/latest/candidates');
-      console.log(response);
+      return response;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+
+  async getCandidateById(candidateId) {
+    try {
+      const response = await this.requester.get(`/candidates/candidate?id=${candidateId}`);
       return response;
     } catch (error) {
       throw new Error(error.response.data.message);
@@ -31,7 +38,6 @@ const ListingsService = new (class ListingsService {
   async getJobOffers() {
     try {
       const response = await this.requester.get('/jobOffers');
-      console.log(response);
       return response;
     } catch (error) {
       throw new Error(error.response.data.message);
@@ -41,7 +47,6 @@ const ListingsService = new (class ListingsService {
   async getLatestJobOffers() {
     try {
       const response = await this.requester.get('/latest/jobOffers');
-      console.log(response);
       return response;
     } catch (error) {
       throw new Error(error.response.data.message);
@@ -51,25 +56,11 @@ const ListingsService = new (class ListingsService {
   async getJobOfferById(offerId) {
     try {
       const response = await this.requester.get(`/jobOffers/offer?id=${offerId}`);
-      console.log(response);
       return response;
     } catch (error) {
-      console.log(error);
       throw new Error(error.response.data.message);
     }
   }
-
-  // async getCandidatesInfo(id) {
-  //   try {
-  //     const response = await this.requester.get(`/job-offers/employer/${id}`, {
-  //       params: { test: 7 },
-  //     });
-  //     console.log(response);
-  //     return response;
-  //   } catch (error) {
-  //     throw new Error(error.response.data.message);
-  //   }
-  // }
 })();
 
 export default ListingsService;

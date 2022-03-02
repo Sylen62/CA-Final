@@ -99,7 +99,7 @@ const HomePageLatestJobs = () => {
   return (
     <LatestListingsContainer>
       <Typography component="h2" variant="h3" textAlign="center" sx={{ mb: '3rem' }}>Latest Job Offers</Typography>
-      { !loading && jobOffers ? (
+      { !loading && jobOffers && jobOffers.length > 0 ? (
         <CardSwiper>
           {jobOffers.map((jobData) => (
             <SwiperSlide key={`${jobData.id}`}>

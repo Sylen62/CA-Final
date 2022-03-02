@@ -28,6 +28,19 @@ const getLatestCandidates = async (_, res) => {
   }
 };
 
+const getCandidateById = async (req, res) => {
+  const { id } = req.query;
+  try {
+    const userDoc = await UserModel.findById(id);
+    const user = new UserViewModel(userDoc);
+    res.status(200).json({ user });
+  } catch ({ message }) {
+    res.status(404).send({
+      message,
+    });
+  }
+};
+
 const getJobOffers = async (_, res) => {
   try {
     const jobOfferDocs = await JobOfferModel.find().sort({ createdAt: -1 }).populate('user');
@@ -76,6 +89,7 @@ const getJobOfferById = async (req, res) => {
 module.exports = {
   getCandidates,
   getLatestCandidates,
+  getCandidateById,
   getJobOffers,
   getLatestJobOffers,
   getJobOfferById,

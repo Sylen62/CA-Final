@@ -2,6 +2,7 @@ const express = require('express');
 const {
   getCandidates,
   getLatestCandidates,
+  getCandidateById,
   getJobOffers,
   getLatestJobOffers,
   getJobOfferById,
@@ -12,6 +13,8 @@ const router = express.Router();
 router.get('/candidates', getCandidates);
 
 router.get('/latest/candidates', getLatestCandidates);
+
+router.get('/candidates/candidate', getCandidateById);
 
 router.get('/jobOffers', getJobOffers);
 

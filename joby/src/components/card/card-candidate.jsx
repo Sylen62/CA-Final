@@ -78,7 +78,7 @@ const CardCandidate = ({ data, maxWidth, height }) => {
               variant="body2"
               textAlign="center"
             >
-              {data.candidateShortDescription ?? 'No description'}
+              {data.shortDescription ?? 'No description'}
             </Typography>
           </CardContent>
           <CardActions sx={{ position: 'relative', height: '60px' }} />

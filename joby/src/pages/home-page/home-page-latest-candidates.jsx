@@ -63,18 +63,16 @@ const HomePageLatestCandidates = () => {
   return (
     <LatestListingsContainer>
       <Typography component="h2" variant="h3" textAlign="center" sx={{ my: '3rem' }}>Latest Candidates</Typography>
-      { !loading && candidates ? (
+      { !loading && candidates && candidates?.length > 0 ? (
         <CardSwiper>
           {candidates.map((candidateData) => (
-            <SwiperSlide key={`${candidateData.id}`}>
+            <SwiperSlide key={`${candidateData.id}`} style={{ marginRight: 0 }}>
               <CardCandidate data={candidateData} />
             </SwiperSlide>
           ))}
         </CardSwiper>
       ) : (
-        <NoListingsContainer>
-          Currently there are no candidates. Come back later.
-        </NoListingsContainer>
+        <NoListingsContainer>Currently there are no candidates. Come back later.</NoListingsContainer>
       )}
     </LatestListingsContainer>
   );

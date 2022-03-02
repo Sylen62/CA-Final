@@ -14,7 +14,7 @@ const routeStructure = [
       { path: 'jobs', pageName: 'JobPage' },
       { path: 'jobs/:jobId', pageName: 'JobPageJob' },
       { path: 'candidates', pageName: 'CandidatePage' },
-      { path: 'candidates/:id', pageName: 'CandidatePageCandidate' },
+      { path: 'candidates/:candidateId', pageName: 'CandidatePageCandidate' },
       { path: 'sign-in', pageName: 'SignInPage', auth: PUBLIC_ONLY },
       { path: 'sign-up', pageName: 'SignUpPage', auth: PUBLIC_ONLY },
       { path: 'candidate/profile', pageName: 'CandidateProfilePage', auth: CANDIDATE },

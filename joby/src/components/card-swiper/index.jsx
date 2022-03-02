@@ -26,6 +26,9 @@ const StyledSwiper = styled(Swiper)(({ theme }) => ({
   '& .swiper-pagination-bullet': {
     backgroundColor: theme.palette.secondary.main,
   },
+  '& .swiper-wrapper .swiper-slide': {
+    margin: 'auto !important',
+  },
   // '& .swiper-button-next::after': {
   //   display: 'none',
   // },

@@ -109,7 +109,7 @@ const JobPageJob = () => {
       setLoading(false);
       jobOfferRef.current.innerHTML = JSON.parse(fetchedJobOffer.data.offer.description);
       employerDescriptionRef.current.innerHTML = JSON.parse(
-        fetchedJobOffer.data.offer.user.employerDescription,
+        fetchedJobOffer.data.offer.user.fullDescription,
       );
     })();
   }, []);

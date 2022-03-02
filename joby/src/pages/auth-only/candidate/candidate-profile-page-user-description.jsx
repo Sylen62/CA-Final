@@ -43,9 +43,9 @@ const CandidateProfilePageUserDescription = ({
       <Typography component="h3" variant="subtitle2" textAlign="center">Maximum of 300 characters</Typography>
       <UserProfileForm onSubmit={handleSubmit}>
         <CandidateDescriptionTextArea
-          name="candidateShortDescription"
+          name="shortDescription"
           onChange={handleChange}
-          value={values.candidateShortDescription}
+          value={values.shortDescription}
         />
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <ButtonUpdate loading={isSubmitting || submiting} type="submit" btnText="Update description" sx={{ maxWidth: { sm: '400px' } }} />
