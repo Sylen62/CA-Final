@@ -1,5 +1,6 @@
 const Mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
+const mongoosePaginate = require('mongoose-paginate');
 
 const jobOfferSchema = new Mongoose.Schema(
   {
@@ -41,6 +42,7 @@ const jobOfferSchema = new Mongoose.Schema(
   }
 );
 
+jobOfferSchema.plugin(mongoosePaginate);
 jobOfferSchema.plugin(uniqueValidator);
 
 const JobOfferModel = Mongoose.model('JobOffer', jobOfferSchema);

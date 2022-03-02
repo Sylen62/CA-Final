@@ -19,22 +19,17 @@ const JobOfferService = new (class JobOfferService {
     });
   }
 
-  // async getJobOffers() {
-  //   try {
-  //     const response = await this.requester.get('/job-offers/');
-  //     console.log(response);
-  //     return response;
-  //   } catch (error) {
-  //     throw new Error(error.response.data.message);
-  //   }
-  // }
-
-  async getEmployerJobOffers(id) {
+  async getEmployerJobOffers(id, tablePage, rowsPerPage, tableOrder) {
+    const { field, order } = tableOrder;
     try {
       const response = await this.requester.get(`/job-offers/employer/${id}`, {
-        params: { test: 7 },
+        params: {
+          tablePage,
+          rowsPerPage,
+          field,
+          order,
+        },
       });
-      console.log(response);
       return response;
     } catch (error) {
       throw new Error(error.response.data.message);

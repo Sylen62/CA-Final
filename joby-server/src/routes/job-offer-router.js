@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/', getOffers);
 
-router.get('/employer/:employerId', getEmployerOffers);
+router.get('/employer/:id', getEmployerOffers);
 
 router.get('/:id', getOffer);
 

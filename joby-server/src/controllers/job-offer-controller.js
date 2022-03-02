@@ -8,10 +8,17 @@ const getOffers = async (_, res) => {
 };
 
 const getEmployerOffers = async (req, res) => {
-  const { employerId } = req.params;
-  const jobOfferDocs = await JobOfferModel.find({ user: employerId });
-  const offers = jobOfferDocs.map((jobOfferDoc) => new JobOfferViewModel(jobOfferDoc));
-  res.status(200).json({ offers });
+  const { id } = req.params;
+  const { tablePage, rowsPerPage, field, order } = req.query;
+  const jobOffers = await JobOfferModel.paginate(
+    { user: id },
+    { page: tablePage, limit: rowsPerPage, sort: { [field]: order } }
+  );
+  // const jobOfferDocs = await JobOfferModel.find({ user: id }, null, {
+  //   sort: { [field]: order },
+  // });
+  const offers = jobOffers.docs.map((jobOfferDoc) => new JobOfferViewModel(jobOfferDoc));
+  res.status(200).json({ offers, offerCount: jobOffers.total });
 };
 
 const getOffer = async (req, res) => {

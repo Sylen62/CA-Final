@@ -25,7 +25,7 @@ class JobOfferViewModel {
     this.activeUntill = activeUntill;
     this.daysLeft = moment(activeUntill).diff(moment(), 'days');
     this.description = description;
-    this.createdAt = createdAt;
+    this.createdAt = moment(createdAt).format('YYYY-MM-DD');
     this.updatedAt = updatedAt;
   }
 }
