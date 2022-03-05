@@ -6,7 +6,7 @@ import DatePicker from '@mui/lab/DatePicker';
 import { useTheme } from '@emotion/react';
 import FormTextField from '../text-field/form-text-field';
 
-const JobOfferDatepicker = ({ name, label }) => {
+const JobOfferDatepicker = ({ name, label, ...restProps }) => {
   const [value, setValue] = useState(null);
   const theme = useTheme();
   return (
@@ -58,6 +58,7 @@ const JobOfferDatepicker = ({ name, label }) => {
             },
           },
         }}
+        {...restProps}
       />
     </LocalizationProvider>
   );

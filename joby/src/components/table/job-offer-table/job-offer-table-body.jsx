@@ -5,9 +5,12 @@ import {
 import { useNavigate } from 'react-router-dom';
 import ButtonContained from '../../button/button-contained';
 import ButtonOutlined from '../../button/button-outlined';
+import JobOfferService from '../../../services/job-offer-service';
 
 const JobOfferTableBody = ({ loading, jobOffers }) => {
   const navigate = useNavigate();
+
+  const handleOfferDelete = (id) => JobOfferService.deleteJobOffer(id);
 
   return (
     <TableBody>
@@ -21,7 +24,7 @@ const JobOfferTableBody = ({ loading, jobOffers }) => {
           <TableCell align="right">{offer.activeUntill}</TableCell>
           <TableCell align="right">
             <Box sx={{ display: 'inline-flex', gap: '1rem' }}>
-              <ButtonOutlined size="small" btnText="Delete" />
+              <ButtonOutlined onClick={() => handleOfferDelete(offer.id)} size="small" btnText="Delete" />
               <ButtonContained onClick={() => navigate(`/employer/job-offers/edit/${offer.id}`)} size="small" btnText="Edit" />
             </Box>
           </TableCell>

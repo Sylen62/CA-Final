@@ -92,6 +92,7 @@ const HomePageLatestJobs = () => {
     setLoading(true);
     (async () => {
       const fetchedJobOffers = await ListingsService.getLatestJobOffers();
+      console.log(fetchedJobOffers);
       setJobOffers(fetchedJobOffers.data.offers);
       setLoading(false);
     })();

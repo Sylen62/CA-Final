@@ -61,9 +61,11 @@ const getLatestJobOffers = async (_, res) => {
       .sort({ createdAt: -1 })
       .limit(8)
       .populate('user');
+    console.log(jobOfferDocs);
     const offers = jobOfferDocs
       .filter(({ activeUntill }) => moment(activeUntill).diff(moment(), 'days') >= 0)
       .map((jobOfferDoc) => new JobOfferViewModel(jobOfferDoc));
+    console.log('offers', offers);
     res.status(200).json({ offers });
   } catch ({ message }) {
     res.status(404).send({
@@ -74,7 +76,6 @@ const getLatestJobOffers = async (_, res) => {
 
 const getJobOfferById = async (req, res) => {
   const { id } = req.query;
-  console.log(req.query.id);
   try {
     const jobOfferDoc = await JobOfferModel.findById(id).populate('user');
     const offer = new JobOfferViewModel(jobOfferDoc);

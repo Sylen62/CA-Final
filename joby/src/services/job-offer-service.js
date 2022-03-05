@@ -45,6 +45,37 @@ const JobOfferService = new (class JobOfferService {
       throw new Error(error.response.data.message);
     }
   }
+
+  async getJobOfferById(id) {
+    try {
+      const response = await this.requester.get(`/job-offers/employer/offer/${id}`);
+      console.log(response);
+      return response.data.offer;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+
+  async updateJobOffer(data) {
+    const { id, ...body } = data;
+    try {
+      const response = await this.requester.patch(`/job-offers/employer/offer/${id}`, body);
+      console.log(response);
+      return response.data.offer;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+
+  async deleteJobOffer(id) {
+    try {
+      const response = await this.requester.delete(`/job-offers/${id}`);
+      console.log(response);
+      return true;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
 })();
 
 export default JobOfferService;

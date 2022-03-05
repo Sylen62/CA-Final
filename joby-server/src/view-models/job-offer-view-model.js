@@ -12,6 +12,7 @@ class JobOfferViewModel {
     activeFrom,
     activeUntill,
     description,
+    city,
     createdAt,
     updatedAt,
   }) {
@@ -21,10 +22,11 @@ class JobOfferViewModel {
     this.salaryFrom = salaryFrom;
     this.salaryTo = salaryTo;
     this.salaryType = salaryType;
-    this.activeFrom = activeFrom;
-    this.activeUntill = activeUntill;
+    this.activeFrom = moment(activeFrom).format('YYYY-MM-DD');
+    this.activeUntill = moment(activeUntill).format('YYYY-MM-DD');
     this.daysLeft = moment(activeUntill).diff(moment(), 'days');
     this.description = description;
+    this.city = city;
     this.createdAt = moment(createdAt).format('YYYY-MM-DD');
     this.updatedAt = updatedAt;
   }

@@ -34,6 +34,10 @@ const jobOfferSchema = new Mongoose.Schema(
     },
     description: {
       type: 'string',
+      required: false,
+    },
+    city: {
+      type: 'string',
       required: true,
     },
   },
