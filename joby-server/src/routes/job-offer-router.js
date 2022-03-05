@@ -1,25 +1,26 @@
 const express = require('express');
 const {
-  getOffers,
-  getEmployerOffers,
-  getJobOfferById,
-  createOffer,
-  updateOffer,
-  deleteOffer,
+  getEmployerJobOffers,
+  getEmployerJobOfferById,
+  createEmployerJobOffer,
+  updateEmployerJobOffer,
+  deleteEmployerJobOffer,
 } = require('../controllers/job-offer-controller');
+const authMiddleware = require('../middlewares/auth-middleware');
+const employerMiddleware = require('../middlewares/employer-middleware');
 
 const router = express.Router();
 
-router.get('/', getOffers);
+router.use(authMiddleware, employerMiddleware);
 
-router.get('/employer/:id', getEmployerOffers);
+router.get('/employer/:id', getEmployerJobOffers);
 
-router.get('/employer/offer/:id', getJobOfferById);
+router.get('/employer/offer/:id', getEmployerJobOfferById);
 
-router.post('/create', createOffer);
+router.post('/create', createEmployerJobOffer);
 
-router.patch('/employer/offer/:id', updateOffer);
+router.patch('/employer/offer/:id', updateEmployerJobOffer);
 
-router.delete('/:id', deleteOffer);
+router.delete('/:id', deleteEmployerJobOffer);
 
 module.exports = router;

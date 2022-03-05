@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Box, Grid, MenuItem } from '@mui/material';
 import * as yup from 'yup';
@@ -8,6 +9,7 @@ import {
 import { convertToHTML } from 'draft-convert';
 import MUIRichTextEditor from 'mui-rte';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import ButtonContained from '../../../../components/button/button-contained';
 import JobOfferDatepicker from '../../../../components/datepicker/job-offer-datepicker';
 import UserProfileForm from '../../../../components/form/user-profile-form';
@@ -43,6 +45,7 @@ const EmployerJobOfferActionForm = ({ pageAction, jobOffer }) => {
   const [initEditorContent, setInitEditorContent] = useState();
   const { user } = useSelector(authSelector);
   const textEditorControls = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'undo', 'redo', 'numberList', 'bulletList', 'clear'];
+  const navigate = useNavigate();
 
   const initialValues = {
     offerName: jobOffer?.offerName ?? '',
@@ -61,21 +64,22 @@ const EmployerJobOfferActionForm = ({ pageAction, jobOffer }) => {
     }
   }, []);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (pageAction === 'edit') {
-      JobOfferService.updateJobOffer({
+      const { success, message } = await JobOfferService.updateJobOffer({
         ...data,
         description: JSON.stringify(editorContent),
         id: jobOffer.id,
       });
+      navigate('/employer/job-offers', { state: { open: true, success, message } });
     } else {
-      JobOfferService.createJobOffer({
+      const { success, message } = await JobOfferService.createJobOffer({
         ...data,
         description: JSON.stringify(editorContent),
         user: user.id,
       });
+      navigate('/employer/job-offers', { state: { open: true, success, message } });
     }
-    // navigate(-1);
   };
 
   const handleDescriptionChange = (data) => {

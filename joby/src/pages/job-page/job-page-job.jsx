@@ -153,7 +153,7 @@ const JobPageJob = () => {
               </CompanyInfoContainer>
               <Typography component="h4" variant="h4" textAlign="center" sx={{ mt: '1rem' }}>Job Offer</Typography>
               <JobInfoContainer sx={{ mt: '1rem' }}>
-                <Typography component="h4" variant="h4">{data.jobOffer.title}</Typography>
+                <Typography component="h4" variant="h4">{jobOffer.offerName}</Typography>
                 <Box ref={jobOfferRef} />
               </JobInfoContainer>
               <Typography component="h4" variant="h4" textAlign="center" sx={{ my: '1rem' }}>Additional Information</Typography>
@@ -178,7 +178,7 @@ const JobPageJob = () => {
                   <Grid item>
                     <AditionalInfoContainer>
                       <Typography component="h5" variant="h5">City</Typography>
-                      <p>{jobOffer.city || 'Vilnius'}</p>
+                      <p>{jobOffer.city}</p>
                     </AditionalInfoContainer>
                   </Grid>
                   <Grid item>

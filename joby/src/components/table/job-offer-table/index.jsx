@@ -9,6 +9,7 @@ import { authSelector } from '../../../store/auth';
 import JobOfferTableHead from './job-offer-table-head';
 import JobOfferTablePagination from './job-offer-table-pagination';
 import JobOfferTableBody from './job-offer-table-body';
+import InfoSnackbar from '../../snackbar';
 
 const StyledTablePaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
@@ -24,11 +25,23 @@ const JobOfferTable = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [tablePage, setTablePage] = useState(0);
   const [jobOfferCount, setJobOfferCount] = useState(0);
+  const [infoSnackbar, setInfoSnackbar] = useState({ open: false, success: false, message: '' });
+
+  const handleSnackbarClose = (_, reason) => {
+    if (reason === 'clickaway') return;
+    setInfoSnackbar({ open: false });
+  };
 
   const getJobOffers = async () => {
     setLoading(true);
-    const { data: { offers, offerCount } } = await JobOfferService
+    const {
+      success, message, offers, offerCount,
+    } = await JobOfferService
       .getEmployerJobOffers(id, tablePage + 1, rowsPerPage, tableOrder);
+    if (!success) {
+      setInfoSnackbar({ open: true, success, message });
+      setLoading(false);
+    }
     setJobOffers(offers);
     setJobOfferCount(offerCount);
     setLoading(false);
@@ -54,22 +67,30 @@ const JobOfferTable = () => {
   };
 
   return (
-    <TableContainer component={StyledTablePaper} elevation={0}>
-      <Table>
-        <JobOfferTableHead
-          handleTableOrderChange={handleTableOrderChange}
-          tableOrder={tableOrder}
+    <>
+      <InfoSnackbar {...infoSnackbar} handleSnackbarClose={handleSnackbarClose} />
+      <TableContainer component={StyledTablePaper} elevation={0}>
+        <Table>
+          <JobOfferTableHead
+            handleTableOrderChange={handleTableOrderChange}
+            tableOrder={tableOrder}
+          />
+          <JobOfferTableBody
+            loading={loading}
+            jobOffers={jobOffers}
+            setInfoSnackbar={setInfoSnackbar}
+            getJobOffers={getJobOffers}
+          />
+        </Table>
+        <JobOfferTablePagination
+          jobOfferCount={jobOfferCount}
+          rowsPerPage={rowsPerPage}
+          tablePage={tablePage}
+          handleChangePage={handleChangePage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
         />
-        <JobOfferTableBody loading={loading} jobOffers={jobOffers} />
-      </Table>
-      <JobOfferTablePagination
-        jobOfferCount={jobOfferCount}
-        rowsPerPage={rowsPerPage}
-        tablePage={tablePage}
-        handleChangePage={handleChangePage}
-        handleChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-    </TableContainer>
+      </TableContainer>
+    </>
   );
 };
 export default JobOfferTable;

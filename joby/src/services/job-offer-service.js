@@ -1,12 +1,12 @@
 import axios from 'axios';
-import AuthService from './auth-service';
+import SessionService from './session-service';
 
 // Singleton pattern - only one object of a class
 const JobOfferService = new (class JobOfferService {
   static validateToken() {
-    const token = AuthService.getToken();
+    const token = SessionService.get('auth_token');
     if (!token) {
-      throw new Error('Can not get user images without authentication');
+      throw new Error('Need authentication');
     }
 
     return token;
@@ -20,6 +20,7 @@ const JobOfferService = new (class JobOfferService {
   }
 
   async getEmployerJobOffers(id, tablePage, rowsPerPage, tableOrder) {
+    const token = JobOfferService.validateToken();
     const { field, order } = tableOrder;
     try {
       const response = await this.requester.get(`/job-offers/employer/${id}`, {
@@ -29,51 +30,70 @@ const JobOfferService = new (class JobOfferService {
           field,
           order,
         },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
-      return response;
-    } catch (error) {
-      throw new Error(error.response.data.message);
+      return response.data;
+    } catch ({ success, message }) {
+      return { success, message };
     }
   }
 
   async createJobOffer(body) {
+    const token = JobOfferService.validateToken();
     try {
-      const response = await this.requester.post('/job-offers/create', body);
-      console.log(response);
-      return true;
-    } catch (error) {
-      throw new Error(error.response.data.message);
+      const response = await this.requester.post('/job-offers/create', body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch ({ success, message }) {
+      return { success, message };
     }
   }
 
   async getJobOfferById(id) {
+    const token = JobOfferService.validateToken();
     try {
-      const response = await this.requester.get(`/job-offers/employer/offer/${id}`);
-      console.log(response);
-      return response.data.offer;
+      const response = await this.requester.get(`/job-offers/employer/offer/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
     } catch (error) {
       throw new Error(error.response.data.message);
     }
   }
 
   async updateJobOffer(data) {
+    const token = JobOfferService.validateToken();
     const { id, ...body } = data;
     try {
-      const response = await this.requester.patch(`/job-offers/employer/offer/${id}`, body);
-      console.log(response);
-      return response.data.offer;
+      const response = await this.requester.patch(`/job-offers/employer/offer/${id}`, body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
     } catch (error) {
       throw new Error(error.response.data.message);
     }
   }
 
   async deleteJobOffer(id) {
+    const token = JobOfferService.validateToken();
     try {
-      const response = await this.requester.delete(`/job-offers/${id}`);
-      console.log(response);
-      return true;
-    } catch (error) {
-      throw new Error(error.response.data.message);
+      const response = await this.requester.delete(`/job-offers/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch ({ success, message }) {
+      return { success, message };
     }
   }
 })();

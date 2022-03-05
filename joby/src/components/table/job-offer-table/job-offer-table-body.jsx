@@ -7,10 +7,16 @@ import ButtonContained from '../../button/button-contained';
 import ButtonOutlined from '../../button/button-outlined';
 import JobOfferService from '../../../services/job-offer-service';
 
-const JobOfferTableBody = ({ loading, jobOffers }) => {
+const JobOfferTableBody = ({
+  loading, jobOffers, setInfoSnackbar, getJobOffers,
+}) => {
   const navigate = useNavigate();
 
-  const handleOfferDelete = (id) => JobOfferService.deleteJobOffer(id);
+  const handleOfferDelete = async (id) => {
+    const { success, message } = await JobOfferService.deleteJobOffer(id);
+    if (success) getJobOffers();
+    setInfoSnackbar({ open: true, success, message });
+  };
 
   return (
     <TableBody>
