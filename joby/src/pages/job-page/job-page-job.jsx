@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from 'react';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import {
@@ -73,24 +72,6 @@ const AditionalInfoContainer = styled(Box)(({ theme }) => ({
   minWidth: '200px',
 }));
 
-const test = '<p><strong>Job description</strong></p><p>Furniture1 needs people with PHP Developer experience, ready to work with multiple European markets (13+) and we are looking for a solution focused individuals who are always looking for the best way to execute a project.</p><ul><li>Develop new features and maintain existing web applications.</li><li>Integrate various REST APIs.</li><li>Working on projects that are based on PHP.</li><li>Troubleshooting issues and identifying solutions.</li><li>Test and maintain software to ensure quality and performance.</li><li>Work in a multi-functional, self-organized team based on Agile principles and Scrum framework.</li></ul><p><strong>Requirements</strong></p><ul><li>Knowledge of PHP / MySQL.</li><li>Knowledge of Javascript / Jquery.</li><li>Ability to work in team and multi-task effectively.</li><li>Attention to quality and details.</li><li>Good time &amp; task management skill</li></ul><p><strong>Company offers</strong></p><ul><li>Experience with Smarty (PHP template engine).</li><li>Experience with Github versioning system.</li><li>Experience in e-commerce field.</li></ul><p>We provide flexible working conditions (working in the office or partially remote), competitive salary based on experience, all of the usual office perks and more. You would have an opportunity to contribute to meaningful and challenging projects, therefore we guarantee that everyday life will definitely not be boring!</p>';
-
-const data = {
-  id: '1',
-  img: 'https://unsplash.it/500/400',
-  employerName: 'Employer Name 1',
-  employerFullDescription: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dolorum dolores volupt ea iure, molestiae doloribus, soluta velit cum fugiat tempore facere sint corpor, esse mollitia quo repellendus dolor veritatis. Provident molestias neque minus oa nostrum, odit quibusdam soluta eum quas iusto voluptates in natus, numquam laborua quae nemo? (Elmoyer short info) Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum, atque. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, blanditiis? Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, omnis? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, deserunt.',
-  jobOffer: {
-    title: 'Junior - Mid PHP developer',
-    offer: test,
-  },
-  salaryFrom: 1300,
-  salaryTo: 2000,
-  salaryType: 'Net',
-  city: 'Vilnius',
-  activeFor: 12,
-};
-
 const JobPageJob = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -106,8 +87,8 @@ const JobPageJob = () => {
       const { offer } = await ListingsService.getJobOfferById(jobId);
       setJobOffer(offer);
       setLoading(false);
-      jobOfferRef.current.innerHTML = JSON.parse(offer.description);
-      employerDescriptionRef.current.innerHTML = JSON.parse(offer.user.fullDescription);
+      jobOfferRef.current.innerHTML = offer.description ? JSON.parse(offer.description) : 'No description';
+      employerDescriptionRef.current.innerHTML = offer.user.fullDescription ? JSON.parse(offer.user.fullDescription) : 'No description';
     })();
   }, []);
 
@@ -127,7 +108,7 @@ const JobPageJob = () => {
                   <Grid item xs={12} md={4} sx={{ width: '100%', maxHeight: { xs: '10%', sm: '30%', lg: '100%' } }}>
                     <StyledImageBox>
                       <Image
-                        src={jobOffer.user.image}
+                        src={jobOffer.user.image ?? ''}
                         duration={500}
                         height="100%"
                         width="100%"
@@ -141,7 +122,7 @@ const JobPageJob = () => {
                   <Grid item xs={12} md={8}>
                     <StyledContentContainer>
                       <Typography component="div" variant="h5" sx={{ mb: '1rem' }}>
-                        {jobOffer.user.employerName}
+                        {jobOffer.user.employerName ?? 'No name'}
                       </Typography>
                       <p ref={employerDescriptionRef} />
                     </StyledContentContainer>

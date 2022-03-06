@@ -26,16 +26,10 @@ const SendCvModal = ({ open, handleOpenModal }) => {
 
   const onFileChange = (event) => {
     setFile(event.target.files[0].name);
-    console.log(event.target.files[0]);
   };
-
-  // const handleFileSelection = () => {
-  //   uploadInputRef.current.click();
-  // };
 
   const handleSendCV = () => {
     handleOpenModal(false);
-    console.log('sending');
   };
   return (
     <Modal
@@ -54,6 +48,7 @@ const SendCvModal = ({ open, handleOpenModal }) => {
             style={{ display: 'none' }}
             type="file"
             onChange={onFileChange}
+            accept="application/pdf"
           />
           <FormTextField
             name="file"

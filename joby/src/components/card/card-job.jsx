@@ -50,7 +50,7 @@ const CardJob = ({ data }) => {
       >
         <StyledCardMedia>
           <Image
-            src={image}
+            src={image ?? ''}
             duration={500}
             height="100%"
             width="100%"

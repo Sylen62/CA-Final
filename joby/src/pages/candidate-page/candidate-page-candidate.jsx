@@ -74,7 +74,7 @@ const CandidatePageCandidate = () => {
       const { candidate } = await ListingsService.getCandidateById(candidateId);
       setFetchedCandidate(candidate);
       setLoading(false);
-      fullDescriptionRef.current.innerHTML = JSON.parse(candidate.fullDescription);
+      fullDescriptionRef.current.innerHTML = candidate.fullDescription ? JSON.parse(candidate.fullDescription) : 'No description';
     })();
   }, []);
 
@@ -126,7 +126,7 @@ const CandidatePageCandidate = () => {
                         />
                       </Grid>
                       <Grid item>
-                        <p>{fetchedCandidate.shortDescription}</p>
+                        <p>{fetchedCandidate.shortDescription ?? 'No description'}</p>
                       </Grid>
                     </Grid>
                   </StyledContentContainer>
