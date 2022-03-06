@@ -53,7 +53,7 @@ const CardCandidate = ({ data }) => (
           title={`${data.name} ${data.surname}`}
           sx={{
             p: 0,
-            my: '5px',
+            mt: '10px',
             height: '32px',
             width: '270px',
             alignSelf: 'center',
@@ -69,8 +69,9 @@ const CardCandidate = ({ data }) => (
           sx={{
             py: 0,
             px: '10px',
-            mt: '5px',
             display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             height: '200px',
           }}
         >
