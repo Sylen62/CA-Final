@@ -10,55 +10,55 @@ const ListingsService = new (class ListingsService {
 
   async getCandidates() {
     try {
-      const response = await this.requester.get('/candidates');
-      return response;
-    } catch (error) {
-      throw new Error(error.response.data.message);
+      const { data } = await this.requester.get('/candidates');
+      return data;
+    } catch ({ message }) {
+      return { success: false, message };
     }
   }
 
   async getLatestCandidates() {
     try {
-      const response = await this.requester.get('/latest/candidates');
-      return response;
-    } catch (error) {
-      throw new Error(error.response.data.message);
+      const { data } = await this.requester.get('/latest/candidates');
+      return data;
+    } catch ({ message }) {
+      return { success: false, message };
     }
   }
 
   async getCandidateById(candidateId) {
     try {
-      const response = await this.requester.get(`/candidates/candidate?id=${candidateId}`);
-      return response;
-    } catch (error) {
-      throw new Error(error.response.data.message);
+      const { data } = await this.requester.get(`/candidates/candidate?id=${candidateId}`);
+      return data;
+    } catch ({ message }) {
+      return { success: false, message };
     }
   }
 
   async getJobOffers() {
     try {
-      const response = await this.requester.get('/jobOffers');
-      return response;
-    } catch (error) {
-      throw new Error(error.response.data.message);
+      const { data } = await this.requester.get('/jobOffers');
+      return data;
+    } catch ({ message }) {
+      return { success: false, message };
     }
   }
 
   async getLatestJobOffers() {
     try {
-      const response = await this.requester.get('/latest/jobOffers');
-      return response;
-    } catch (error) {
-      throw new Error(error.response.data.message);
+      const { data } = await this.requester.get('/latest/jobOffers');
+      return data;
+    } catch ({ message }) {
+      return { success: false, message };
     }
   }
 
   async getJobOfferById(offerId) {
     try {
-      const response = await this.requester.get(`/jobOffers/offer?id=${offerId}`);
-      return response;
-    } catch (error) {
-      throw new Error(error.response.data.message);
+      const { data } = await this.requester.get(`/jobOffers/offer?id=${offerId}`);
+      return data;
+    } catch ({ message }) {
+      return { success: false, message };
     }
   }
 })();

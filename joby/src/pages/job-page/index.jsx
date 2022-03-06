@@ -12,8 +12,8 @@ const JobPage = () => {
   useEffect(() => {
     setLoading(true);
     (async () => {
-      const fetchedJobOffers = await ListingsService.getJobOffers();
-      setJobOffers(fetchedJobOffers.data.offers);
+      const { offers } = await ListingsService.getJobOffers();
+      setJobOffers(offers);
       setLoading(false);
     })();
   }, []);
