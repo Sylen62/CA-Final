@@ -103,14 +103,11 @@ const JobPageJob = () => {
   useEffect(() => {
     setLoading(true);
     (async () => {
-      const fetchedJobOffer = await ListingsService.getJobOfferById(jobId);
-      setJobOffer(fetchedJobOffer.data.offer);
-      console.log(fetchedJobOffer);
+      const { offer } = await ListingsService.getJobOfferById(jobId);
+      setJobOffer(offer);
       setLoading(false);
-      jobOfferRef.current.innerHTML = JSON.parse(fetchedJobOffer.data.offer.description);
-      employerDescriptionRef.current.innerHTML = JSON.parse(
-        fetchedJobOffer.data.offer.user.fullDescription,
-      );
+      jobOfferRef.current.innerHTML = JSON.parse(offer.description);
+      employerDescriptionRef.current.innerHTML = JSON.parse(offer.user.fullDescription);
     })();
   }, []);
 

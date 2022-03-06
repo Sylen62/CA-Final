@@ -29,11 +29,9 @@ const getCandidateById = async (req, res) => {
   try {
     const userDoc = await UserModel.findById(id);
     const user = new UserViewModel(userDoc);
-    res.status(200).json({ user });
+    res.status(200).json({ success: true, candidate: user });
   } catch ({ message }) {
-    res.status(404).send({
-      message,
-    });
+    res.status(404).send({ success: false, message });
   }
 };
 

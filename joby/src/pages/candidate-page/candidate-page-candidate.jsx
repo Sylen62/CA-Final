@@ -64,19 +64,17 @@ const JobInfoContainer = styled(Box)(({ theme }) => ({
 const CandidatePageCandidate = () => {
   const navigate = useNavigate();
   const fullDescriptionRef = useRef(null);
-  const [candidate, setCandidate] = useState();
+  const [fetchedCandidate, setFetchedCandidate] = useState();
   const [loading, setLoading] = useState(true);
   const { candidateId } = useParams();
 
   useEffect(() => {
     setLoading(true);
     (async () => {
-      const fetchedCandidate = await ListingsService.getCandidateById(candidateId);
-      setCandidate(fetchedCandidate.data.user);
+      const { candidate } = await ListingsService.getCandidateById(candidateId);
+      setFetchedCandidate(candidate);
       setLoading(false);
-      fullDescriptionRef.current.innerHTML = JSON.parse(
-        fetchedCandidate.data.user.fullDescription,
-      );
+      fullDescriptionRef.current.innerHTML = JSON.parse(candidate.fullDescription);
     })();
   }, []);
 
@@ -91,7 +89,7 @@ const CandidatePageCandidate = () => {
                 <Grid item xs={12} md={4} sx={{ width: '100%', maxHeight: { xs: '10%', sm: '30%', lg: '100%' } }}>
                   <StyledImageBox>
                     <Image
-                      src={candidate.image ?? ''}
+                      src={fetchedCandidate.image ?? ''}
                       duration={500}
                       height="100%"
                       width="100%"
@@ -107,9 +105,9 @@ const CandidatePageCandidate = () => {
                     <Grid container sx={{ display: 'flex' }}>
                       <Grid item xs={12} sm={6}>
                         <Typography component="div" variant="h5" sx={{ display: 'flex', justifyContent: { xs: 'center', sm: 'flex-start' } }}>
-                          {candidate.name}
+                          {fetchedCandidate.name}
                           {' '}
-                          {candidate.surname}
+                          {fetchedCandidate.surname}
                         </Typography>
                       </Grid>
                       <Grid
@@ -121,14 +119,14 @@ const CandidatePageCandidate = () => {
                         }}
                       >
                         <SocialLinksContainer
-                          linkedIn={candidate.linkedIn}
-                          facebook={candidate.facebook}
-                          instagram={candidate.instagram}
-                          twitter={candidate.twitter}
+                          linkedIn={fetchedCandidate.linkedIn}
+                          facebook={fetchedCandidate.facebook}
+                          instagram={fetchedCandidate.instagram}
+                          twitter={fetchedCandidate.twitter}
                         />
                       </Grid>
                       <Grid item>
-                        <p>{candidate.shortDescription}</p>
+                        <p>{fetchedCandidate.shortDescription}</p>
                       </Grid>
                     </Grid>
                   </StyledContentContainer>
