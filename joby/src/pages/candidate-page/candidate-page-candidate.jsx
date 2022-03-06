@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import { Image } from 'mui-image';
 import { useNavigate, useParams } from 'react-router-dom';
 import ButtonOutlined from '../../components/button/button-outlined';
-import SocialLinksContainer from '../../components/containers/social-links-container';
+import SocialLinksContainer from '../../components/container/social-links-container';
 import ListingsService from '../../services/listings-service';
 
 const CandidateInfoContainer = styled(Box)(({ theme }) => ({

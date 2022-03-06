@@ -1,12 +1,10 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import {
-  Box, Card, CardActions, CardContent, CardHeader, CardMedia, Divider, Typography,
+  Box, Card, CardContent, CardMedia, Divider, Typography, styled,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import { Image } from 'mui-image';
-import SocialLinksContainer from '../containers/social-links-container';
+import SocialLinksContainer from '../container/social-links-container';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   margin: 'auto',
@@ -27,76 +25,76 @@ const StyledCardMedia = styled(CardMedia)(() => ({
   borderRadius: '20px',
 }));
 
-const CardCandidate = ({ data, maxWidth, height }) => {
-  const cardTextRef = useRef(null);
-
-  useEffect(() => {
-    const wordArray = cardTextRef.current.innerHTML.split(' ');
-    while (cardTextRef.current.scrollHeight > cardTextRef.current.offsetHeight) {
-      wordArray.pop();
-      cardTextRef.current.innerHTML = `${wordArray.join(' ')}...`;
-    }
-  }, [cardTextRef]);
-
-  return (
-    <StyledCard>
-      <Link
-        to={`/candidates/${data.id}`}
-        style={{
-          textDecoration: 'none',
-          textTransform: 'none',
-          color: 'white',
-        }}
-      >
-        <Box sx={{ position: 'relative', height: '100%' }}>
-          {/* <StyledCardMedia component="img" src={data.image} sx={{ maxWidth }} /> */}
-          <StyledCardMedia>
-            <Image
-              src={data.image || 'undefined'}
-              duration={500}
-              height="100%"
-              width="100%"
-              sx={{
-                borderRadius: '10px',
-                objectPosition: 'center',
-              }}
-            />
-          </StyledCardMedia>
-          <Divider variant="middle" sx={(theme) => ({ backgroundColor: theme.palette.secondary.main })} />
-          <CardHeader title={`${data.name} ${data.surname}`} sx={{ py: '10px', textAlign: 'center' }} />
-          <CardContent
-            ref={cardTextRef}
-            sx={{
-              py: '10px',
-              display: 'flex',
-              alignItems: 'center',
-              height: '200px',
-            }}
-          >
-            {/* Max 300 char */}
-            <Typography
-              variant="body2"
-              textAlign="center"
-            >
-              {data.shortDescription ?? 'No description'}
-            </Typography>
-          </CardContent>
-          <CardActions sx={{ position: 'relative', height: '60px' }} />
-        </Box>
-      </Link>
-      <Box sx={{
-        display: 'flex', justifyContent: 'center', position: 'absolute', bottom: 25, height: '40px', width: '100%',
+const CardCandidate = ({ data }) => (
+  <StyledCard>
+    <Link
+      to={`/candidates/${data.id}`}
+      style={{
+        textDecoration: 'none',
+        textTransform: 'none',
+        color: 'white',
       }}
-      >
-        <SocialLinksContainer
-          linkedIn={data.linkedIn}
-          facebook={data.facebook}
-          instagram={data.instagram}
-          twitter={data.twitter}
-        />
+    >
+      <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <StyledCardMedia>
+          <Image
+            src={data.image || ''}
+            duration={500}
+            height="100%"
+            width="100%"
+            sx={{
+              borderRadius: '10px',
+              objectPosition: 'center',
+            }}
+          />
+        </StyledCardMedia>
+        <Divider variant="middle" sx={(theme) => ({ backgroundColor: theme.palette.secondary.main })} />
+        <Box
+          title={`${data.name} ${data.surname}`}
+          sx={{
+            p: 0,
+            my: '5px',
+            height: '32px',
+            width: '270px',
+            alignSelf: 'center',
+            display: 'inline-block',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          <Typography component="h4" variant="h5" textAlign="center" sx={{ width: '270px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            {`${data.name} ${data.surname}`}
+          </Typography>
+        </Box>
+        <CardContent
+          sx={{
+            py: 0,
+            px: '10px',
+            mt: '5px',
+            display: 'flex',
+            height: '200px',
+          }}
+        >
+          <Typography
+            variant="body2"
+            textAlign="center"
+          >
+            {data.shortDescription ?? 'No description'}
+          </Typography>
+        </CardContent>
       </Box>
-    </StyledCard>
-  );
-};
+    </Link>
+    <Box sx={{
+      display: 'flex', justifyContent: 'center', position: 'absolute', bottom: 19, height: '40px', width: '100%',
+    }}
+    >
+      <SocialLinksContainer
+        linkedIn={data.linkedIn}
+        facebook={data.facebook}
+        instagram={data.instagram}
+        twitter={data.twitter}
+      />
+    </Box>
+  </StyledCard>
+);
 
 export default CardCandidate;
