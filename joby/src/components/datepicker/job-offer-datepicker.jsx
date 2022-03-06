@@ -6,7 +6,9 @@ import DatePicker from '@mui/lab/DatePicker';
 import { useTheme } from '@emotion/react';
 import FormTextField from '../text-field/form-text-field';
 
-const JobOfferDatepicker = ({ name, label, ...restProps }) => {
+const JobOfferDatepicker = ({
+  name, label, inputProps, ...restProps
+}) => {
   const [value, setValue] = useState(null);
   const theme = useTheme();
   return (
@@ -20,7 +22,14 @@ const JobOfferDatepicker = ({ name, label, ...restProps }) => {
         onChange={(newValue) => {
           setValue(newValue);
         }}
-        renderInput={(params) => <FormTextField name={name} sx={{ mt: '1rem' }} fullWidth {...params} />}
+        renderInput={(params) => (
+          <FormTextField
+            name={name}
+            fullWidth
+            {...params}
+            {...inputProps}
+          />
+        )}
         InputAdornmentProps={{
           sx: {
             '& .MuiSvgIcon-root': {

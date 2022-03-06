@@ -41,8 +41,8 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const FormTextField = (props) => (
-  <StyledTextField {...props} />
+const FormTextField = ({ ...restProps }) => (
+  <StyledTextField variant="outlined" {...restProps} />
 );
 
 export default FormTextField;
