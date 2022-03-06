@@ -7,29 +7,29 @@ import NoListingsContainer from '../../components/container/no-listings-containe
 
 const CandidatePage = () => {
   const [loading, setLoading] = useState(true);
-  const [candidates, setCandidates] = useState();
+  const [fetchedCandidates, setfetchedCandidates] = useState();
 
   useEffect(() => {
     setLoading(true);
     (async () => {
-      const fetchedCandidates = await ListingsService.getCandidates();
-      setCandidates(fetchedCandidates.data.candidates);
+      const { candidates } = await ListingsService.getCandidates();
+      setfetchedCandidates(candidates);
       setLoading(false);
     })();
   }, []);
   return (
     <MainContentContainer maxWidth="xl">
       <Typography component="h2" variant="h3" textAlign="center" sx={{ mb: '3rem', mt: '1rem' }}>Candidates</Typography>
-      { !loading && candidates ? (
+      { !loading && fetchedCandidates ? (
         <Grid container columnSpacing={2} rowSpacing={4}>
-          {candidates.map((candidateData) => (
+          {fetchedCandidates.map((candidateData) => (
             <Grid item key={candidateData.id} xs={12} sm={6} md={4} lg={3} sx={{ display: 'flex', justifyContent: 'center' }}>
               <CardCandidate data={candidateData} maxWidth="300px" height="180px" />
             </Grid>
           ))}
         </Grid>
       ) : null }
-      { !loading && !candidates ? (
+      { !loading && !fetchedCandidates ? (
         <NoListingsContainer>
           Currently there are no candidates. Come back later.
         </NoListingsContainer>
