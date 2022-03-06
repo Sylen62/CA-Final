@@ -6,8 +6,6 @@ export const defaultTheme = createTheme(theme, {
   mode: 'dark',
   palette: {
     background: {
-      // default: '#EFF2F7',
-      // default: '#020204',
       default: '#090d11',
     },
     primary: {
@@ -45,7 +43,6 @@ export const defaultTheme = createTheme(theme, {
       editor: {
         padding: '1rem',
         minHeight: '300px',
-        // borderBottom: '1px solid red',
       },
       editorContainer: {
         minHeight: '300px',
