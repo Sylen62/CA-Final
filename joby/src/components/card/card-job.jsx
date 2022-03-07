@@ -27,7 +27,7 @@ const CardJob = ({ data }) => {
   const cardTextRef = useRef(null);
   const {
     id, user: { image, employerName }, offerName, salaryFrom, salaryTo, salaryType,
-    daysLeft,
+    daysLeft, city,
   } = data;
 
   useEffect(() => {
@@ -97,7 +97,7 @@ const CardJob = ({ data }) => {
                 <Typography variant="caption">{salaryType}</Typography>
               </Box>
               <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="body1">Vilnius</Typography>
+                <Typography variant="body1">{city}</Typography>
                 <Typography variant="caption">
                   Left
                   {' '}
