@@ -1,9 +1,4 @@
-import {
-  PUBLIC_ONLY,
-  // // AUTH,
-  EMPLOYER,
-  CANDIDATE,
-} from './auth-types';
+import { PUBLIC_ONLY, EMPLOYER, CANDIDATE } from './auth-types';
 
 const routeStructure = [
   {

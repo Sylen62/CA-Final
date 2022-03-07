@@ -8,9 +8,9 @@ const ListingsService = new (class ListingsService {
     });
   }
 
-  async getCandidates() {
+  async getCandidates(limit) {
     try {
-      const { data } = await this.requester.get('/candidates');
+      const { data } = await this.requester.get('/candidates', { params: { limit } });
       return data;
     } catch ({ message }) {
       return { success: false, message };
@@ -35,9 +35,9 @@ const ListingsService = new (class ListingsService {
     }
   }
 
-  async getJobOffers() {
+  async getJobOffers(limit) {
     try {
-      const { data } = await this.requester.get('/jobOffers');
+      const { data } = await this.requester.get('/jobOffers', { params: { limit } });
       return data;
     } catch ({ message }) {
       return { success: false, message };

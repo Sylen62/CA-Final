@@ -31,7 +31,7 @@ const AuthForm = ({
   <Container
     maxWidth="sm"
     component="main"
-    sx={{ pt: '7vh', height: 'calc(100vh - 122px)' }}
+    sx={{ py: '4vh', minHeight: 'calc(100vh - 122px)' }}
   >
     <StyledPaper elevation={0}>
       <Box component="form" onSubmit={onSubmit}>

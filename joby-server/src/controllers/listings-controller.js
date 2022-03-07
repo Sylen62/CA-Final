@@ -4,15 +4,33 @@ const UserViewModel = require('../view-models/user-view-model');
 const JobOfferModel = require('../models/job-offer-model');
 const JobOfferViewModel = require('../view-models/job-offer-view-model');
 
-const getCandidates = async (_, res) => {
+const getCandidates = async (req, res) => {
+  const { limit } = req.query;
   try {
-    const userDocs = await UserModel.find({ role: 'CANDIDATE' }).sort({ createdAt: -1 });
-    const users = userDocs.map((userDoc) => new UserViewModel(userDoc));
-    res.status(200).json({ success: true, candidates: users });
+    const users = await UserModel.paginate(
+      { role: 'CANDIDATE' },
+      { page: 1, limit, sort: { createdAt: -1 } }
+    );
+    console.log(users);
+    // const userDocs = await UserModel.find({ role: 'CANDIDATE' }).sort({ createdAt: -1 });
+    const candidates = users.docs.map((user) => new UserViewModel(user));
+    res.status(200).json({ success: true, candidates, total: users.total });
   } catch ({ message }) {
+    console.log(message);
     res.status(404).send({ success: false, message });
   }
 };
+
+// const { limit } = req.query;
+// try {
+//   const jobOffers = await JobOfferModel.paginate(
+//     {},
+//     { page: 1, limit, sort: { createdAt: -1 }, populate: 'user' }
+//   );
+//   const offers = jobOffers.docs
+//     .filter(({ activeUntill }) => moment(activeUntill).diff(moment(), 'days') >= 0)
+//     .map((jobOfferDoc) => new JobOfferViewModel(jobOfferDoc));
+//   res.status(200).json({ success: true, offers: offers, total: jobOffers.total });
 
 const getLatestCandidates = async (_, res) => {
   try {
@@ -35,17 +53,19 @@ const getCandidateById = async (req, res) => {
   }
 };
 
-const getJobOffers = async (_, res) => {
+const getJobOffers = async (req, res) => {
+  const { limit } = req.query;
   try {
-    const jobOfferDocs = await JobOfferModel.find().sort({ createdAt: -1 }).populate('user');
-    const offers = jobOfferDocs
+    const jobOffers = await JobOfferModel.paginate(
+      {},
+      { page: 1, limit, sort: { createdAt: -1 }, populate: 'user' }
+    );
+    const offers = jobOffers.docs
       .filter(({ activeUntill }) => moment(activeUntill).diff(moment(), 'days') >= 0)
       .map((jobOfferDoc) => new JobOfferViewModel(jobOfferDoc));
-    res.status(200).json({ offers });
+    res.status(200).json({ success: true, offers: offers, total: jobOffers.total });
   } catch ({ message }) {
-    res.status(404).send({
-      message,
-    });
+    res.status(404).send({ success: false, message });
   }
 };
 

@@ -87,8 +87,12 @@ const JobPageJob = () => {
       const { offer } = await ListingsService.getJobOfferById(jobId);
       setJobOffer(offer);
       setLoading(false);
-      jobOfferRef.current.innerHTML = offer.description ? JSON.parse(offer.description) : 'No description';
-      employerDescriptionRef.current.innerHTML = offer.user.fullDescription ? JSON.parse(offer.user.fullDescription) : 'No description';
+      jobOfferRef.current.innerHTML = offer.description
+        && offer.description.length > 9
+        ? JSON.parse(offer.description) : 'No description';
+      employerDescriptionRef.current.innerHTML = offer.user.fullDescription
+        && offer.user.fullDescription.length > 9
+        ? JSON.parse(offer.user.fullDescription) : 'No description';
     })();
   }, []);
 

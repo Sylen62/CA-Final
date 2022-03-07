@@ -1,6 +1,7 @@
 const Mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const { isEmail } = require('validator');
+const mongoosePaginate = require('mongoose-paginate');
 
 const userSchema = new Mongoose.Schema(
   {
@@ -79,6 +80,7 @@ const userSchema = new Mongoose.Schema(
   }
 );
 
+userSchema.plugin(mongoosePaginate);
 userSchema.plugin(uniqueValidator);
 
 const UserModel = Mongoose.model('User', userSchema);

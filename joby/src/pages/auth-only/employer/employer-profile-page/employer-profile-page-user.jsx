@@ -115,7 +115,7 @@ const EmployerProfilePageUser = ({
             error={touched.repeatNewPassword && Boolean(errors.repeatNewPassword)}
             helperText={touched.repeatNewPassword && errors.repeatNewPassword}
           />
-          <ButtonUpdate loading={isSubmitting || submiting} type="submit" btnText="Update accoount" sx={{ mt: '1rem' }} />
+          <ButtonUpdate loading={isSubmitting || submiting} type="submit" btnText="Update account" sx={{ mt: '1rem' }} />
         </Grid>
       </Grid>
     </UserProfileForm>

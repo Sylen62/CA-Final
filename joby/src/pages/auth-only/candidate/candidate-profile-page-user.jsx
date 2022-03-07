@@ -133,7 +133,7 @@ const CandidateProfilePageUser = ({
             error={touched.repeatNewPassword && Boolean(errors.repeatNewPassword)}
             helperText={touched.repeatNewPassword && errors.repeatNewPassword}
           />
-          <ButtonUpdate loading={isSubmitting || submiting} type="submit" btnText="Update accoount" sx={{ mt: '1rem', height: { sm: '56px' } }} />
+          <ButtonUpdate loading={isSubmitting || submiting} type="submit" btnText="Update account" sx={{ mt: '1rem', height: { sm: '56px' } }} />
         </Grid>
       </Grid>
     </UserProfileForm>
