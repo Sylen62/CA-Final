@@ -20,6 +20,11 @@ Full-stack website created for the purpose of learning to code.
 
 ### Installing
 
+* Open downloaded project folder and navigate to joby-server.
+* Open .env-example file and add your SERVER_PORT, DB_CONNECTION, HASH_SECRET, TOKEN_SECRET, PUBLIC_PATH, IMG_FOLDER_NAME, SERVER_DOMAIN.
+* Change .env-example file name into .env.
+* If you changed SERVER_PORT in .env (.env-example), navigate from project folder to joby > src > services and in each file change baseUrl
+  port to the same as in .env (.env-example) file.
 * Open project folder with terminal.
 * Navigate to server (joby-server) folder:
   ```
