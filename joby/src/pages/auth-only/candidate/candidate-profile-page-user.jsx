@@ -70,7 +70,15 @@ const CandidateProfilePageUser = ({
   return (
     <UserProfileForm onSubmit={handleSubmit}>
       <Grid container spacing={2} sx={{ pt: { xs: '1rem', md: '0.5rem' } }}>
-        <Grid item xs={12} sm={6} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={6}
+          sx={{
+            display: 'grid', gridAutoFlow: 'row', gridRowGap: '1rem', alignContent: 'start',
+          }}
+        >
           <FormTextField
             name="name"
             label="Name"
@@ -87,7 +95,6 @@ const CandidateProfilePageUser = ({
             label="Surname"
             fullWidth
             size="medium"
-            sx={{ mt: '1rem' }}
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.surname}
@@ -99,14 +106,21 @@ const CandidateProfilePageUser = ({
             label="Email"
             fullWidth
             size="medium"
-            sx={{ mt: '1rem' }}
             value={user.email}
             InputProps={{
               readOnly: true,
             }}
           />
         </Grid>
-        <Grid item xs={12} sm={6} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={6}
+          sx={{
+            display: 'grid', gridAutoFlow: 'row', gridRowGap: '1rem', alignContent: 'start',
+          }}
+        >
           <FormTextField
             name="newPassword"
             label="New password"
@@ -124,7 +138,6 @@ const CandidateProfilePageUser = ({
             label="Repeat new password"
             fullWidth
             size="medium"
-            sx={{ mt: '1rem' }}
             type="password"
             onChange={handleChange}
             onBlur={handleBlur}
@@ -132,7 +145,7 @@ const CandidateProfilePageUser = ({
             error={touched.repeatNewPassword && Boolean(errors.repeatNewPassword)}
             helperText={touched.repeatNewPassword && errors.repeatNewPassword}
           />
-          <ButtonUpdate loading={isSubmitting || submiting} type="submit" btnText="Update account" sx={{ mt: '1rem', height: { sm: '56px' } }} />
+          <ButtonUpdate loading={isSubmitting || submiting} type="submit" btnText="Update account" sx={{ mt: 0, height: { sm: '56px' } }} />
         </Grid>
       </Grid>
     </UserProfileForm>
