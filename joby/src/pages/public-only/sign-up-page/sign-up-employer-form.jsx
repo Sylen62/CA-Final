@@ -28,34 +28,6 @@ const SignUpEmployerForm = ({
         variant="outlined"
       />
     </Grid>
-    {/* <Grid item xs={12} sm={6}>
-      <FormTextField
-        name="name"
-        label="Name"
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={values.name}
-        error={touched.name && Boolean(errors.name)}
-        helperText={touched.name && errors.name}
-        disabled={isSubmitting}
-        fullWidth
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs={12} sm={6}>
-      <FormTextField
-        name="surname"
-        label="Surname"
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={values.surname}
-        error={touched.surname && Boolean(errors.surname)}
-        helperText={touched.surname && errors.surname}
-        disabled={isSubmitting}
-        fullWidth
-        variant="outlined"
-      />
-    </Grid> */}
     <Grid item xs={12}>
       <FormTextField
         name="email"

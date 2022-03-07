@@ -1,10 +1,11 @@
 import React from 'react';
-import { Container, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+import MainContentContainer from '../../components/container/main-content-container';
 
 const ErrorPage = () => (
-  <Container maxWidth="lg" sx={{ minHeight: 'calc(100vh - 124px)', py: '7vh' }}>
+  <MainContentContainer maxWidth="lg" sx={{ minHeight: 'calc(100vh - 124px)', py: '7vh' }}>
     <Typography textAlign="center">Error - page not found</Typography>
-  </Container>
+  </MainContentContainer>
 );
 
 export default ErrorPage;

@@ -13,8 +13,7 @@ const breakPoint = 'md';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-  // boxShadow: '0px 0.5px 0px #4BD6D0',
-  borderBottom: '1px solid #4BD6D0',
+  borderBottom: `1px solid ${theme.palette.secondary.main}`,
   zIndex: '1400',
 }));
 

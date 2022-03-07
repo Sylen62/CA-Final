@@ -76,7 +76,6 @@ const CandidateProfilePageUser = ({
             label="Name"
             fullWidth
             size="medium"
-            // sx={{ maxWidth: '400px' }}
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.name}

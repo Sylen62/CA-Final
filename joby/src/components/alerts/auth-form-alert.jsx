@@ -4,10 +4,10 @@ import { Alert } from '@mui/material';
 
 const StyledAlert = styled(Alert)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-  border: '2px groove red',
-  color: 'red',
+  border: `2px groove ${theme.palette.warning.main}`,
+  color: theme.palette.warning.main,
   '& .MuiAlert-icon': {
-    color: 'red',
+    color: theme.palette.warning.main,
   },
 }));
 

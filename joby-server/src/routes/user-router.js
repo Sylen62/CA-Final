@@ -5,7 +5,6 @@ const { updateUser, updateUserImage } = require('../controllers/user-controller'
 
 const router = express.Router();
 
-// middlewares
 router.use(authMiddleware);
 
 router.patch('/profile', updateUser);

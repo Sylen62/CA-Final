@@ -105,7 +105,7 @@ const SignUpPage = () => {
     initialValues,
     validationSchema,
     onSubmit,
-    enableReinitialize: true, // Lets you change initialValues
+    enableReinitialize: true,
   });
 
   const handleEmailChange = (e) => {

@@ -8,7 +8,6 @@ const PublicOnlyProtector = ({ children }) => {
   const auth = useSelector(authSelector);
 
   if (auth.loggedIn) {
-    // console.log(auth.loggedIn);
     return <Navigate to={auth.redirectTo ?? routes.HomePage} />;
   }
 

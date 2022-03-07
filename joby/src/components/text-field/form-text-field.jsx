@@ -24,11 +24,6 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
     borderColor: theme.palette.secondary.main,
   },
-  // '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline .Mui-Error': {
-  //   borderColor: 'orange',
-  //   // borderColor: theme.palette.common.white,
-  //   // Kazkodel isvis nerodo tada
-  // },
   '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
     border: `2px solid ${theme.palette.common.white}`,
   },
@@ -46,5 +41,3 @@ const FormTextField = ({ ...restProps }) => (
 );
 
 export default FormTextField;
-
-/* Fix black (change to white) color of some fields while disabled */

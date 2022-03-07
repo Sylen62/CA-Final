@@ -13,16 +13,14 @@ const { SERVER_PORT, DB_CONNECTION, SERVER_DOMAIN, PUBLIC_PATH } = process.env;
 
 const corsOptions = {
   origin: 'http://localhost:3000',
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  optionsSuccessStatus: 200,
 };
 
-// Middlewares
 server.use(morgan('tiny'));
 server.use(cors(corsOptions));
 server.use(express.json());
 server.use(express.static(PUBLIC_PATH));
 
-// Response handlers
 server.use('/api/auth', authRouter);
 server.use('/api/users', userRouter);
 server.use('/api/job-offers', jobOfferRouter);

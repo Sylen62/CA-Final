@@ -25,11 +25,9 @@ const StyledImageBox = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.up('sm')]: {
     height: '228px',
-    // maxWidth: '80%',
   },
   [theme.breakpoints.up('md')]: {
     height: '266px',
-    // maxWidth: '100%',
   },
   [theme.breakpoints.up('lg')]: {
     width: '100%',

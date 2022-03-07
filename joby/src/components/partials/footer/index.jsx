@@ -4,12 +4,9 @@ import { styled } from '@mui/material/styles';
 
 const StyledFooter = styled(Box)(({ theme }) => ({
   position: 'relative',
-  left: 0,
-  bottom: 0,
-  right: 0,
   backgroundColor: theme.palette.primary.main,
-  borderTop: '1px solid #4BD6D0',
-  height: '60px',
+  borderTop: `1px solid ${theme.palette.secondary.main}`,
+  height: theme.mixins.footer.height,
   display: 'flex',
   alignItems: 'center',
 }));

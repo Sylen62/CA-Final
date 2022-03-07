@@ -13,7 +13,6 @@ const EmployerProtector = ({ children }) => {
   }
 
   if (auth.user.role !== 'EMPLOYER') {
-    // return <Navigate to={routes.ProfilePage} />;
     return <Navigate to={routes.HomePage} />;
   }
 

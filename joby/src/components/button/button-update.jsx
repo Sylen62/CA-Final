@@ -8,7 +8,6 @@ const StyledButton = styled(Button)(({ theme }) => ({
   border: 'none',
   fontWeight: '600',
   marginTop: '10px',
-  // maxWidth: '400px',
   '&:hover': {
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.secondary.main,

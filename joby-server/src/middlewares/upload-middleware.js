@@ -1,9 +1,6 @@
 const multer = require('multer');
 
 const storage = multer.diskStorage({
-  // BŪTŲ GALIMA VAROTOJO NUOTRAUKAS DĖTI Į SPECIFINĮ APLANKĄ, PVZ. PAGAL ID
-  // TUOMET PAPILDOMAI REIKTŲ SUKURTI APSAUGAS, KAD TIK TAS VARTOTOJAS
-  // ARBA ADMINAS GALĖTŲ PASIEKTI TĄ APLANKĄ
   destination: function (req, file, cb) {
     const { PUBLIC_PATH, IMG_FOLDER_NAME } = process.env;
     cb(null, `${PUBLIC_PATH}/${IMG_FOLDER_NAME}/`);

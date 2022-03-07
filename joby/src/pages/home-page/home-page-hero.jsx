@@ -43,10 +43,10 @@ const HeroImageContainer = styled(Box)(({ theme }) => ({
 
 const HeroContentText = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.up('xs')]: {
-    fontSize: '8.5vw',
+    fontSize: '16.5vw',
   },
   [theme.breakpoints.up('sm')]: {
-    fontSize: '8.5vw',
+    fontSize: '12.5vw',
   },
   [theme.breakpoints.up('md')]: {
     fontSize: '5.5vw',

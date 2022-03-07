@@ -3,7 +3,6 @@ import SessionService from './session-service';
 import reduxStore from '../store/index';
 import { login, logout, authFailed } from '../store/auth';
 
-// Singleton pattern - only one object of a class
 const AuthService = new (class AuthService {
   constructor() {
     const token = SessionService.get('auth_token');
@@ -26,7 +25,6 @@ const AuthService = new (class AuthService {
   }
 
   getToken() {
-    // console.log('token ', SessionService.get('auth_token'));
     return this.token;
   }
 
@@ -67,7 +65,6 @@ const AuthService = new (class AuthService {
       this.setAuth(token);
     } catch (error) {
       reduxStore.dispatch(authFailed());
-      console.error('Token is not valid');
     }
   }
 

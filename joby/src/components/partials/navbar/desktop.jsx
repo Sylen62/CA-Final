@@ -5,8 +5,6 @@ import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import LoginIcon from '@mui/icons-material/Login';
-
-// Mano
 import Logo from './logo';
 import StyledNavLink from './styled-nav-link';
 

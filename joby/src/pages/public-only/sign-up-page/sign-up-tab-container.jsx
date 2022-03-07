@@ -7,12 +7,10 @@ import SignUpCandidateForm from './sign-up-candidate-form';
 import SignUpEmployerForm from './sign-up-employer-form';
 
 const TabsList = styled(TabsListUnstyled)(({ theme }) => ({
-  // minWidth: '320px',
   width: '100%',
   backgroundColor: theme.palette.primary.main,
   borderRadius: '8px',
   marginBottom: '16px',
-  // gap: '10px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -29,28 +27,20 @@ const Tab = styled(TabUnstyled)(({ theme }) => ({
   padding: '12px 16px',
   margin: '6px 6px',
   border: 'none',
-  // borderRadius: '5px',
   display: 'flex',
   justifyContent: 'center',
   borderRadius: '2px',
   outline: `2px solid ${theme.palette.common.white}`,
   outlineOffset: '2px',
   '&:hover': {
-    // backgroundColor: 'blue',
     color: theme.palette.secondary.main,
     borderRadius: '2px',
     outline: `2px solid ${theme.palette.secondary.main}`,
     outlineOffset: '2px',
   },
-  // '&:focus': {
-  //   color: '#fff',
-  //   borderRadius: '3px',
-  //   outline: '2px solid blue',
-  //   outlineOffset: '2px',
-  // },
   '&.Mui-selected': {
     backgroundColor: theme.palette.secondary.main,
-    color: 'black',
+    color: theme.palette.common.black,
     borderRadius: '2px',
     outline: `2px solid ${theme.palette.secondary.main}`,
     outlineOffset: '2px',

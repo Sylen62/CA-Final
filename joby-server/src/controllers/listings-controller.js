@@ -11,26 +11,12 @@ const getCandidates = async (req, res) => {
       { role: 'CANDIDATE' },
       { page: 1, limit, sort: { createdAt: -1 } }
     );
-    console.log(users);
-    // const userDocs = await UserModel.find({ role: 'CANDIDATE' }).sort({ createdAt: -1 });
     const candidates = users.docs.map((user) => new UserViewModel(user));
     res.status(200).json({ success: true, candidates, total: users.total });
   } catch ({ message }) {
-    console.log(message);
     res.status(404).send({ success: false, message });
   }
 };
-
-// const { limit } = req.query;
-// try {
-//   const jobOffers = await JobOfferModel.paginate(
-//     {},
-//     { page: 1, limit, sort: { createdAt: -1 }, populate: 'user' }
-//   );
-//   const offers = jobOffers.docs
-//     .filter(({ activeUntill }) => moment(activeUntill).diff(moment(), 'days') >= 0)
-//     .map((jobOfferDoc) => new JobOfferViewModel(jobOfferDoc));
-//   res.status(200).json({ success: true, offers: offers, total: jobOffers.total });
 
 const getLatestCandidates = async (_, res) => {
   try {

@@ -7,31 +7,28 @@ import { styled } from '@mui/material/styles';
 import FormButton from './auth-form-button';
 
 const StyledLink = styled(Link)(({ theme }) => ({
-  // color: theme.palette.secondary.main,
   color: theme.palette.common.white,
 }));
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: '2rem',
   backgroundColor: theme.palette.primary.main,
-  // boxShadow: '0 1px 5px #4BD6D0',
   border: `1px solid ${theme.palette.secondary.main}`,
-  // border: `1px solid ${theme.palette.common.white}`,
 }));
 
 const AuthForm = ({
-  children, // Form content
-  title, // Form title
-  linkTo, // Link for sign up
-  linkTitle, // Link to sign up title
-  loading, // boolean to show loading animation for button
-  onSubmit, // submit function
-  isValid, // boolean check if from is valid before enabeling button
+  children,
+  title,
+  linkTo,
+  linkTitle,
+  loading,
+  onSubmit,
+  isValid,
 }) => (
   <Container
     maxWidth="sm"
     component="main"
-    sx={{ py: '4vh', minHeight: 'calc(100vh - 122px)' }}
+    sx={(theme) => ({ py: '4vh', minHeight: theme.mixins.content.minContentHeight })}
   >
     <StyledPaper elevation={0}>
       <Box component="form" onSubmit={onSubmit}>

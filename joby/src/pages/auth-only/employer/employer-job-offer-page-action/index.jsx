@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -35,7 +34,9 @@ const EmployerJobOfferAction = () => {
         Offer
       </Typography>
       <SecondaryContentContainer sx={{ mt: 2 }}>
-        { !loading ? <EmployerJobOfferActionForm pageAction={pageAction} jobOffer={jobOffer} /> : null}
+        { !loading
+          ? <EmployerJobOfferActionForm pageAction={pageAction} jobOffer={jobOffer} />
+          : null}
       </SecondaryContentContainer>
       <Box sx={{
         display: 'flex', justifyContent: 'flex-start', gap: '1rem', mt: '1rem',

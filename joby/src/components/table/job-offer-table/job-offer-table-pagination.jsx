@@ -13,10 +13,6 @@ const StyledTablePagination = styled(TablePagination)(({ theme }) => ({
   '.MuiTablePagination-selectIcon': {
     color: theme.palette.secondary.main,
   },
-  '.MuiPaper-root': {
-    // backgroundColor: 'red',
-    // color: 'orange',
-  },
 }));
 
 const JobOfferTablePagination = ({

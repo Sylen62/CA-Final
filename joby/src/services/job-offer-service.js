@@ -1,7 +1,6 @@
 import axios from 'axios';
 import SessionService from './session-service';
 
-// Singleton pattern - only one object of a class
 const JobOfferService = new (class JobOfferService {
   static validateToken() {
     const token = SessionService.get('auth_token');

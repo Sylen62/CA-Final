@@ -47,11 +47,7 @@ const updateUserImage = async (req, res) => {
   try {
     const oldUserDoc = await UserModel.findOne({ email });
 
-    await UserModel.findOneAndUpdate(
-      { email }, // Pagal ką surasti
-      { image: filename }, // Ką atnaujinti
-      { new: false } // sulaukti keičiamo dokumento
-    );
+    await UserModel.findOneAndUpdate({ email }, { image: filename }, { new: false });
 
     const { PUBLIC_PATH, IMG_FOLDER_NAME } = process.env;
     const imgPath = `${PUBLIC_PATH}/${IMG_FOLDER_NAME}/${oldUserDoc.image}`;
