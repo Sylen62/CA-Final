@@ -20,16 +20,31 @@ Full-stack website created for the purpose of learning to code.
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* Open project folder with terminal.
+* Navigate to server (joby-server) folder:
+  ```
+  $ cd joby-server
+  ```
+* Run npm i command to install server dependencies
+  ```
+  $ npm i
+  ```
+* Open project folder again with another terminal.
+* Navigate to client (joby) folder:
+  ```
+  $ cd joby
+  ```
+* Run npm i command to install client dependencies
+  ```
+  $ npm i
+  ```
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+* After installing client and server dependencies run npm start in both terminals.
+  ```
+  $ npm start
+  ```
 
 ## Authors
 
